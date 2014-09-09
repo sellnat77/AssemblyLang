@@ -1,0 +1,46 @@
+A51 MACRO ASSEMBLER  LAB2TASK2                                                            09/05/2014 11:20:46 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02b
+OBJECT MODULE PLACED IN Lab2task2.OBJ
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE Lab2task2.a51 SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 00H
+0000 7531A3            2     MOV 31H,#0A3H
+0003 753224            3     MOV 32H,#24H
+0006 753338            4     MOV 33H,#38H
+0009 75347C            5     MOV 34H,#7CH
+000C 7535D3            6     MOV 35H,#0D3H
+000F 753679            7     MOV 36H,#79H
+                       8     
+0012 C031              9     PUSH 31H
+0014 C032             10     PUSH 32H
+0016 C033             11     PUSH 33H
+0018 C034             12     PUSH 34H
+001A C035             13     PUSH 35H
+001C C036             14     PUSH 36H
+                      15     
+001E D000             16     POP 0
+0020 D001             17     POP 1
+0022 D002             18     POP 2
+0024 D003             19     POP 3
+0026 D004             20     POP 4
+0028 D005             21     POP 5
+                      22     
+                      23     END
+A51 MACRO ASSEMBLER  LAB2TASK2                                                            09/05/2014 11:20:46 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
