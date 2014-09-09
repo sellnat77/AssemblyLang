@@ -1,0 +1,47 @@
+A51 MACRO ASSEMBLER  LAB3TASK2                                                            09/08/2014 19:44:56 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02b
+OBJECT MODULE PLACED IN Lab3Task2.OBJ
+ASSEMBLER INVOKED BY: G:\Keil_v5\C51\BIN\A51.EXE Lab3Task2.a51 SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1             ORG 00H
+0000 7C00              2                     MOV R4,#00H
+0002 7C0A              3                     MOV R4,#0AH ;A != 0
+0004 EC                4                     MOV A,R4
+                       5                     
+0005 7A0B              6                     MOV R2,#0BH     
+0007 7964              7                     MOV R1,#64H             
+0009 7004              8                     JNZ NOZER
+                       9                     
+000B 7466             10                     MOV A,#66H
+000D 7002             11                     JNZ COMPL
+                      12                     
+000F 7488             13     NOZER:  MOV A,#88H
+                      14     
+0011                  15     COMPL:  
+0011 F4               16     INSID:  CPL A
+                      17                     
+0012 D9FD             18                     DJNZ R1,COMPL
+0014 DAFB             19                     DJNZ R2,INSID
+                      20                     
+                      21                     END
+A51 MACRO ASSEMBLER  LAB3TASK2                                                            09/08/2014 19:44:56 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+COMPL. . . . . . .  C ADDR   0011H   A   
+INSID. . . . . . .  C ADDR   0011H   A   
+NOZER. . . . . . .  C ADDR   000FH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
