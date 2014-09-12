@@ -12,14 +12,14 @@
       <ToolsetName>MCS-51</ToolsetName>
       <TargetOption>
         <TargetCommonOption>
-          <Device>AT89C51RD2</Device>
+          <Device>AT80C51RD2</Device>
           <Vendor>Atmel</Vendor>
-          <Cpu>IRAM(0-0xFF) IROM(0-0xFFFF)  XRAM(0-0x6FF) CLOCK(33000000) MODP2</Cpu>
-          <FlashUtilSpec>"batchisp" (-device $D -hardware RS232 -port COM1 -baudrate 19200 -operation MEMORY FLASH LOADBUFFER %H PROGRAM)</FlashUtilSpec>
+          <Cpu>IRAM(0x00 - 0xFF) XRAM(0x00 - 0x3FF) CLOCK(40000000) MODP2</Cpu>
+          <FlashUtilSpec></FlashUtilSpec>
           <StartupFile>"LIB\STARTUP.A51" ("Standard 8051 Startup Code")</StartupFile>
           <FlashDriverDll></FlashDriverDll>
-          <DeviceId>3597</DeviceId>
-          <RegisterFile>at89c51xd2.h</RegisterFile>
+          <DeviceId>5591</DeviceId>
+          <RegisterFile>REG51RD2.H</RegisterFile>
           <MemoryEnv></MemoryEnv>
           <Cmp></Cmp>
           <Asm></Asm>
@@ -35,8 +35,8 @@
           <BinPath></BinPath>
           <IncludePath></IncludePath>
           <LibPath></LibPath>
-          <RegisterFilePath>Atmel\</RegisterFilePath>
-          <DBRegisterFilePath>Atmel\</DBRegisterFilePath>
+          <RegisterFilePath>ATMEL\</RegisterFilePath>
+          <DBRegisterFilePath>ATMEL\</DBRegisterFilePath>
           <TargetStatus>
             <Error>0</Error>
             <ExitCodeStop>0</ExitCodeStop>
@@ -45,7 +45,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\</OutputDirectory>
-          <OutputName>Lab3</OutputName>
+          <OutputName>Lab 4</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
@@ -107,11 +107,11 @@
           <SimDllName>S8051.DLL</SimDllName>
           <SimDllArguments></SimDllArguments>
           <SimDlgDll>DP51.DLL</SimDlgDll>
-          <SimDlgDllArguments>-pATRD2</SimDlgDllArguments>
+          <SimDlgDllArguments>-p51rd2</SimDlgDllArguments>
           <TargetDllName>S8051.DLL</TargetDllName>
           <TargetDllArguments></TargetDllArguments>
           <TargetDlgDll>TP51.DLL</TargetDlgDll>
-          <TargetDlgDllArguments>-pATRD2</TargetDlgDllArguments>
+          <TargetDlgDllArguments>-p51rd2</TargetDlgDllArguments>
         </DllOption>
         <DebugOption>
           <OPTHX>
@@ -167,7 +167,7 @@
         <Utilities>
           <Flash1>
             <UseTargetDll>0</UseTargetDll>
-            <UseExternalTool>1</UseExternalTool>
+            <UseExternalTool>0</UseExternalTool>
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>0</UpdateFlashBeforeDebugging>
             <Capability>0</Capability>
@@ -175,7 +175,7 @@
           </Flash1>
           <bUseTDR>0</bUseTDR>
           <Flash2></Flash2>
-          <Flash3>"batchisp" (-device $D -hardware RS232 -port COM1 -baudrate 19200 -operation MEMORY FLASH LOADBUFFER %H PROGRAM)</Flash3>
+          <Flash3></Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -195,7 +195,7 @@
             <UseOnchipXram>0</UseOnchipXram>
             <HadIRAM>1</HadIRAM>
             <HadXRAM>1</HadXRAM>
-            <HadIROM>1</HadIROM>
+            <HadIROM>0</HadIROM>
             <Moda2>0</Moda2>
             <Moddp2>0</Moddp2>
             <Modp2>1</Modp2>
@@ -267,9 +267,9 @@
                 <Size>0x0</Size>
               </Ocr3>
               <IRO>
-                <Type>1</Type>
+                <Type>0</Type>
                 <StartAddress>0x0</StartAddress>
-                <Size>0x10000</Size>
+                <Size>0x0</Size>
               </IRO>
               <IRA>
                 <Type>0</Type>
@@ -279,7 +279,7 @@
               <XRA>
                 <Type>0</Type>
                 <StartAddress>0x0</StartAddress>
-                <Size>0x700</Size>
+                <Size>0x400</Size>
               </XRA>
               <XRA512>
                 <Type>0</Type>
@@ -363,9 +363,9 @@
           <GroupName>Source Group 1</GroupName>
           <Files>
             <File>
-              <FileName>Lab3Task1.a51</FileName>
+              <FileName>Lab4Task1.a51</FileName>
               <FileType>2</FileType>
-              <FilePath>.\Lab3Task1.a51</FilePath>
+              <FilePath>.\Lab4Task1.a51</FilePath>
             </File>
           </Files>
         </Group>
