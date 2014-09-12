@@ -1,15 +1,15 @@
-BL51 BANKED LINKER/LOCATER V6.22                                                        09/11/2014  15:00:38  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22                                                        09/11/2014  23:09:23  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
-C:\KEIL_V5\C51\BIN\BL51.EXE Lab3Task1.obj TO Lab3 RAMSIZE (256)
+G:\KEIL_V5\C51\BIN\BL51.EXE Lab3Task2.obj TO Lab3 RAMSIZE (256)
 
 
 INPUT MODULES INCLUDED:
-  Lab3Task1.obj (LAB3TASK1)
+  Lab3Task2.obj (LAB3TASK2)
 
 
-LINK MAP OF MODULE:  Lab3 (LAB3TASK1)
+LINK MAP OF MODULE:  Lab3 (LAB3TASK2)
 
 
             TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
@@ -19,34 +19,35 @@ LINK MAP OF MODULE:  Lab3 (LAB3TASK1)
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
-            CODE    0000H     0012H     ABSOLUTE     
+            CODE    0000H     0014H     ABSOLUTE     
 
 
 
-SYMBOL TABLE OF MODULE:  Lab3 (LAB3TASK1)
+SYMBOL TABLE OF MODULE:  Lab3 (LAB3TASK2)
 
   VALUE           TYPE          NAME
   ----------------------------------
 
-  -------         MODULE        LAB3TASK1
-  C:000AH         SYMBOL        LOOP
-  C:0010H         SYMBOL        NOCAR
+  -------         MODULE        LAB3TASK2
+  C:000FH         SYMBOL        COMPL
+  C:000FH         SYMBOL        INSID
+  C:000DH         SYMBOL        NOZER
   C:0000H         LINE#         3
-  C:0002H         LINE#         4
-  C:0004H         LINE#         5
-  C:0006H         LINE#         6
-  C:0008H         LINE#         7
-  C:000AH         LINE#         9
-  C:000BH         LINE#         10
-  C:000CH         LINE#         11
-  C:000DH         LINE#         12
-  C:000FH         LINE#         13
-  C:0010H         LINE#         15
-  -------         ENDMOD        LAB3TASK1
+  C:0002H         LINE#         5
+  C:0003H         LINE#         7
+  C:0005H         LINE#         8
+  C:0007H         LINE#         10
+  C:0009H         LINE#         12
+  C:000BH         LINE#         13
+  C:000DH         LINE#         15
+  C:000FH         LINE#         18
+  C:0010H         LINE#         20
+  C:0012H         LINE#         21
+  -------         ENDMOD        LAB3TASK2
 
 ******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0012H BYTE ( 0%) *
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0014H BYTE ( 0%) *
 ******************************************************************************
 
-Program Size: data=8.0 xdata=0 code=18
+Program Size: data=8.0 xdata=0 code=20
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

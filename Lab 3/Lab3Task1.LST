@@ -1,9 +1,9 @@
-A51 MACRO ASSEMBLER  LAB3TASK1                                                            09/11/2014 15:00:38 PAGE     1
+A51 MACRO ASSEMBLER  LAB3TASK1                                                            09/11/2014 22:48:42 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.02b
 OBJECT MODULE PLACED IN Lab3Task1.OBJ
-ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE Lab3Task1.a51 SET(SMALL) DEBUG EP
+ASSEMBLER INVOKED BY: G:\Keil_v5\C51\BIN\A51.EXE Lab3Task1.a51 SET(SMALL) DEBUG EP
 
 LOC  OBJ            LINE     SOURCE
 
@@ -16,15 +16,15 @@ LOC  OBJ            LINE     SOURCE
 0008 7BFF              7                     MOV R3,#0FFH ;Start R3 as 255
                        8                     
 000A 0A                9     LOOP:   INC R2
-000B 2A               10                     ADD A,R2 
-000C F8               11                     MOV R0,A       ;Increment low byte
+000B 2A               10                     ADD A, R2 
+000C F8               11                     MOV R0,A     ;Assign low byte to current value of A
 000D 5001             12                     JNC NOCAR    ;If no carry add next value to A
 000F 09               13                     INC R1       ;Increment high byte if cy = 1
                       14                     
 0010 DBF8             15     NOCAR:  DJNZ R3,LOOP ;Repeat 255 times
                       16                     
                       17                     END
-A51 MACRO ASSEMBLER  LAB3TASK1                                                            09/11/2014 15:00:38 PAGE     2
+A51 MACRO ASSEMBLER  LAB3TASK1                                                            09/11/2014 22:48:42 PAGE     2
 
 SYMBOL TABLE LISTING
 ------ ----- -------
