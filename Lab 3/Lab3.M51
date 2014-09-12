@@ -1,8 +1,8 @@
-BL51 BANKED LINKER/LOCATER V6.22                                                        09/11/2014  23:09:23  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22                                                        09/12/2014  09:56:40  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
-G:\KEIL_V5\C51\BIN\BL51.EXE Lab3Task2.obj TO Lab3 RAMSIZE (256)
+C:\KEIL_V5\C51\BIN\BL51.EXE Lab3Task2.obj TO Lab3 RAMSIZE (256)
 
 
 INPUT MODULES INCLUDED:
@@ -29,15 +29,15 @@ SYMBOL TABLE OF MODULE:  Lab3 (LAB3TASK2)
   ----------------------------------
 
   -------         MODULE        LAB3TASK2
-  C:000FH         SYMBOL        COMPL
   C:000FH         SYMBOL        INSID
-  C:000DH         SYMBOL        NOZER
+  C:000BH         SYMBOL        NOZER
+  C:000DH         SYMBOL        OUTSI
   C:0000H         LINE#         3
   C:0002H         LINE#         5
-  C:0003H         LINE#         7
+  C:0003H         LINE#         6
   C:0005H         LINE#         8
   C:0007H         LINE#         10
-  C:0009H         LINE#         12
+  C:0009H         LINE#         11
   C:000BH         LINE#         13
   C:000DH         LINE#         15
   C:000FH         LINE#         18

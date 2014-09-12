@@ -1,9 +1,9 @@
-A51 MACRO ASSEMBLER  LAB3TASK2                                                            09/11/2014 23:09:23 PAGE     1
+A51 MACRO ASSEMBLER  LAB3TASK2                                                            09/12/2014 09:56:40 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.02b
 OBJECT MODULE PLACED IN Lab3Task2.OBJ
-ASSEMBLER INVOKED BY: G:\Keil_v5\C51\BIN\A51.EXE Lab3Task2.a51 SET(SMALL) DEBUG EP
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE Lab3Task2.a51 SET(SMALL) DEBUG EP
 
 LOC  OBJ            LINE     SOURCE
 
@@ -12,25 +12,25 @@ LOC  OBJ            LINE     SOURCE
 0000 7C00              3                     MOV R4,#00H
                        4                     ;MOV R4,#0AH  ;A != 0
 0002 EC                5                     MOV A,R4
-                       6                     
-0003 7A0B              7                     MOV R2,#0BH       ;Set R2 to 10
-0005 7964              8                     MOV R1,#64H       ;Set R1 to 100
-                       9                                               ;10*100 = 1000
-0007 7004             10                     JNZ NOZER         ;If A != 0 skip #66H assignment
-                      11                     
-0009 7466             12                     MOV A, #66H   ;If A == 0 assign #66H to A
-000B 7002             13                     JNZ COMPL         ;Skip the #88H assignment
-                      14                     
-000D 7488             15     NOZER:  MOV A, #88H   ;If A != 0 assign #88H
-                      16     
-000F                  17     COMPL:                            ;Outer loop, runs 100 times
-000F F4               18     INSID:  CPL A             ;Inner loop, runs 10 times and compliments A 
+0003 790B              6                     MOV R1,#0BH       ;Set R1 to 10
+                       7                     
+0005 7004              8                     JNZ NOZER         ;If A != 0 skip the #66H assignment
+                       9                     
+0007 7466             10                     MOV A, #66H   ;If A == 0 assign #66H to A
+0009 7002             11                     JNZ OUTSI         ;Skip the #88H assignment
+                      12                     
+000B 7488             13     NOZER:  MOV A, #88H   ;If A != 0 assign #88H
+                      14     
+000D 7A64             15     OUTSI:  MOV R2,#64H       ;Set R2 to 100
+                      16                                               ;10*100 = 1000
+                      17                                               ;Outer loop, runs 10 times
+000F F4               18     INSID:  CPL A             ;Inner loop, runs 100 times and compliments A 
                       19                                               ;Each iteration               
-0010 D9FD             20                     DJNZ R1,COMPL ;Perform outer loop 100 times, dec R1 each time
-0012 DAFB             21                     DJNZ R2,INSID ;Perform inner loop 10 times, dec R2 each time
+0010 DAFD             20                     DJNZ R2,INSID ;Perform inner loop 100 times, dec R2 each time
+0012 D9F9             21                     DJNZ R1,OUTSI ;Perform outer loop 10 times, dec R1 each time
                       22                     
                       23                     END
-A51 MACRO ASSEMBLER  LAB3TASK2                                                            09/11/2014 23:09:23 PAGE     2
+A51 MACRO ASSEMBLER  LAB3TASK2                                                            09/12/2014 09:56:40 PAGE     2
 
 SYMBOL TABLE LISTING
 ------ ----- -------
@@ -38,9 +38,9 @@ SYMBOL TABLE LISTING
 
 N A M E             T Y P E  V A L U E   ATTRIBUTES
 
-COMPL. . . . . . .  C ADDR   000FH   A   
 INSID. . . . . . .  C ADDR   000FH   A   
-NOZER. . . . . . .  C ADDR   000DH   A   
+NOZER. . . . . . .  C ADDR   000BH   A   
+OUTSI. . . . . . .  C ADDR   000DH   A   
 
 
 REGISTER BANK(S) USED: 0 

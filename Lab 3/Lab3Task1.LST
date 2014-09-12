@@ -1,9 +1,9 @@
-A51 MACRO ASSEMBLER  LAB3TASK1                                                            09/11/2014 22:48:42 PAGE     1
+A51 MACRO ASSEMBLER  LAB3TASK1                                                            09/12/2014 09:36:13 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.02b
 OBJECT MODULE PLACED IN Lab3Task1.OBJ
-ASSEMBLER INVOKED BY: G:\Keil_v5\C51\BIN\A51.EXE Lab3Task1.a51 SET(SMALL) DEBUG EP
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE Lab3Task1.a51 SET(SMALL) DEBUG EP
 
 LOC  OBJ            LINE     SOURCE
 
@@ -24,7 +24,7 @@ LOC  OBJ            LINE     SOURCE
 0010 DBF8             15     NOCAR:  DJNZ R3,LOOP ;Repeat 255 times
                       16                     
                       17                     END
-A51 MACRO ASSEMBLER  LAB3TASK1                                                            09/11/2014 22:48:42 PAGE     2
+A51 MACRO ASSEMBLER  LAB3TASK1                                                            09/12/2014 09:36:13 PAGE     2
 
 SYMBOL TABLE LISTING
 ------ ----- -------
