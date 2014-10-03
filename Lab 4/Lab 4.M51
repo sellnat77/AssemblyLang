@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 BL51 BANKED LINKER/LOCATER V6.22                                                        10/02/2014  22:11:49  PAGE 1
 
 
@@ -7,6 +8,17 @@ G:\KEIL_V5\C51\BIN\BL51.EXE lab4Task1.obj TO Lab 4 RAMSIZE (256)
 
 INPUT MODULES INCLUDED:
   lab4Task1.obj (LAB4TASK1)
+=======
+BL51 BANKED LINKER/LOCATER V6.22                                                        09/16/2014  11:49:57  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE Lab4Task1.obj TO Lab 4 RAMSIZE (256)
+
+
+INPUT MODULES INCLUDED:
+  Lab4Task1.obj (LAB4TASK1)
+>>>>>>> b17c479bba4468333a0dbd0c229ccbadf0ec6da1
 
 
 LINK MAP OF MODULE:  Lab 4 (LAB4TASK1)
@@ -19,7 +31,11 @@ LINK MAP OF MODULE:  Lab 4 (LAB4TASK1)
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+<<<<<<< HEAD
             CODE    0000H     004CH     ABSOLUTE     
+=======
+            CODE    0000H     0017H     ABSOLUTE     
+>>>>>>> b17c479bba4468333a0dbd0c229ccbadf0ec6da1
 
 
 
@@ -29,6 +45,7 @@ SYMBOL TABLE OF MODULE:  Lab 4 (LAB4TASK1)
   ----------------------------------
 
   -------         MODULE        LAB4TASK1
+<<<<<<< HEAD
   C:003CH         SYMBOL        BOUNCE
   C:0040H         SYMBOL        DLY0
   C:0042H         SYMBOL        DLY1
@@ -62,4 +79,33 @@ Program Size: data=8.0 xdata=0 code=76
 BL51 BANKED LINKER/LOCATER V6.22                                                      10/02/2014  22:11:49  PAGE 2
 
 
+=======
+  C:000AH         SYMBOL        DELAY
+  C:000CH         SYMBOL        DLY0
+  C:000EH         SYMBOL        DLY1
+  C:0010H         SYMBOL        DLY2
+  C:0005H         SYMBOL        LOOP
+  C:0003H         SYMBOL        MAIN
+  D:0090H         SYMBOL        P1
+  C:0000H         LINE#         7
+  C:0003H         LINE#         10
+  C:0005H         LINE#         11
+  C:0007H         LINE#         12
+  C:0008H         LINE#         13
+  C:000AH         LINE#         15
+  C:000AH         LINE#         19
+  C:000CH         LINE#         20
+  C:000EH         LINE#         21
+  C:0010H         LINE#         22
+  C:0012H         LINE#         23
+  C:0014H         LINE#         24
+  C:0016H         LINE#         25
+  -------         ENDMOD        LAB4TASK1
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0019H BYTE ( 1%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=23
+>>>>>>> b17c479bba4468333a0dbd0c229ccbadf0ec6da1
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -363,9 +363,15 @@
           <GroupName>Source Group 1</GroupName>
           <Files>
             <File>
+<<<<<<< HEAD
               <FileName>lab4Task1.a51</FileName>
               <FileType>2</FileType>
               <FilePath>.\lab4Task1.a51</FilePath>
+=======
+              <FileName>Lab4Task1.a51</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\Lab4Task1.a51</FilePath>
+>>>>>>> b17c479bba4468333a0dbd0c229ccbadf0ec6da1
             </File>
           </Files>
         </Group>
