@@ -1,36 +1,31 @@
-A51 MACRO ASSEMBLER  LAB3TASK2                                                            09/11/2014 23:09:23 PAGE     1
+A51 MACRO ASSEMBLER  LAB3TASK2                                                            09/12/2014 11:09:05 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.02b
 OBJECT MODULE PLACED IN Lab3Task2.OBJ
-ASSEMBLER INVOKED BY: G:\Keil_v5\C51\BIN\A51.EXE Lab3Task2.a51 SET(SMALL) DEBUG EP
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE Lab3Task2.a51 SET(SMALL) DEBUG EP
 
 LOC  OBJ            LINE     SOURCE
 
 0000                   1                     ORG 0000H
-                       2                             
-0000 7C00              3                     MOV R4,#00H
-                       4                     ;MOV R4,#0AH  ;A != 0
-0002 EC                5                     MOV A,R4
-                       6                     
-0003 7A0B              7                     MOV R2,#0BH       ;Set R2 to 10
-0005 7964              8                     MOV R1,#64H       ;Set R1 to 100
-                       9                                               ;10*100 = 1000
-0007 7004             10                     JNZ NOZER         ;If A != 0 skip #66H assignment
-                      11                     
-0009 7466             12                     MOV A, #66H   ;If A == 0 assign #66H to A
-000B 7002             13                     JNZ COMPL         ;Skip the #88H assignment
-                      14                     
-000D 7488             15     NOZER:  MOV A, #88H   ;If A != 0 assign #88H
-                      16     
-000F                  17     COMPL:                            ;Outer loop, runs 100 times
-000F F4               18     INSID:  CPL A             ;Inner loop, runs 10 times and compliments A 
-                      19                                               ;Each iteration               
-0010 D9FD             20                     DJNZ R1,COMPL ;Perform outer loop 100 times, dec R1 each time
-0012 DAFB             21                     DJNZ R2,INSID ;Perform inner loop 10 times, dec R2 each time
-                      22                     
-                      23                     END
-A51 MACRO ASSEMBLER  LAB3TASK2                                                            09/11/2014 23:09:23 PAGE     2
+0000 790B              2     HERE:   MOV R1,#0BH       ;Set R1 to 10
+                       3             
+0002 BC0004            4                     CJNE R4,#00H,EIGHT        
+0005 7466              5                     MOV A, #66H
+0007 7002              6                     JNZ OUTSI
+0009 7488              7     EIGHT:  MOV A, #88H     
+                       8       
+                       9     
+000B 7A64             10     OUTSI:  MOV R2,#64H       ;Set R2 to 100
+                      11                                               ;10*100 = 1000
+                      12                                               ;Outer loop, runs 10 times
+000D F4               13     INSID:  CPL A             ;Inner loop, runs 100 times and compliments A 
+                      14                                               ;Each iteration               
+000E DAFD             15                     DJNZ R2,INSID ;Perform inner loop 100 times, dec R2 each time
+0010 D9F9             16                     DJNZ R1,OUTSI ;Perform outer loop 10 times, dec R1 each time
+0012 80EC             17                     SJMP HERE
+                      18                     END
+A51 MACRO ASSEMBLER  LAB3TASK2                                                            09/12/2014 11:09:05 PAGE     2
 
 SYMBOL TABLE LISTING
 ------ ----- -------
@@ -38,9 +33,10 @@ SYMBOL TABLE LISTING
 
 N A M E             T Y P E  V A L U E   ATTRIBUTES
 
-COMPL. . . . . . .  C ADDR   000FH   A   
-INSID. . . . . . .  C ADDR   000FH   A   
-NOZER. . . . . . .  C ADDR   000DH   A   
+EIGHT. . . . . . .  C ADDR   0009H   A   
+HERE . . . . . . .  C ADDR   0000H   A   
+INSID. . . . . . .  C ADDR   000DH   A   
+OUTSI. . . . . . .  C ADDR   000BH   A   
 
 
 REGISTER BANK(S) USED: 0 
