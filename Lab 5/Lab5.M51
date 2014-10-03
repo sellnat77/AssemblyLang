@@ -1,8 +1,8 @@
-BL51 BANKED LINKER/LOCATER V6.22                                                        10/02/2014  22:35:05  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22                                                        10/03/2014  10:41:36  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
-G:\KEIL_V5\C51\BIN\BL51.EXE Lab5Task1.obj TO Lab5 RAMSIZE (256)
+C:\KEIL_V5\C51\BIN\BL51.EXE Lab5Task1.obj TO Lab5 RAMSIZE (256)
 
 
 INPUT MODULES INCLUDED:
@@ -59,7 +59,7 @@ SYMBOL TABLE OF MODULE:  Lab5 (LAB5TASK1)
 * RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 001FH BYTE ( 1%) *
 ******************************************************************************
 
-BL51 BANKED LINKER/LOCATER V6.22                                                      10/02/2014  22:35:05  PAGE 2
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/03/2014  10:41:36  PAGE 2
 
 
 Program Size: data=8.0 xdata=0 code=76
