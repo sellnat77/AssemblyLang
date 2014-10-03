@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  LAB5TASK1                                                            10/03/2014 10:41:35 PAGE     1
+A51 MACRO ASSEMBLER  LAB5TASK1                                                            10/03/2014 10:44:25 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.02b
@@ -28,30 +28,26 @@ LOC  OBJ            LINE     SOURCE
 0034 7C08             19                     MOV R4,#08H
                       20     
 0036 F590             21     LOOP:   MOV P1, A
-0038 03               22     NORM:   RR A
-0039 23               23     BOUNCE: RL A
-                      24                     
-                      25     
-                      26                     
-003A 7BFF             27                     MOV R3, #0FFH
+                      22                     
+0038 113C             23                     ACALL DELAY
+003A 80FA             24                     SJMP    LOOP
+                      25                     
+003C                  26     DELAY:
+003C 7BFF             27                     MOV R3, #0FFH
                       28     
-003C 79FF             29     DLY0:   MOV R1, #0FFH
+003E 79FF             29     DLY0:   MOV R1, #0FFH
                       30             
-003E 7AFF             31     DLY1:   MOV R2, #0FFH
+0040 7AFF             31     DLY1:   MOV R2, #0FFH
                       32     
-0040 DAFE             33     DLY2:   DJNZ R2, DLY2
+0042 DAFE             33     DLY2:   DJNZ R2, DLY2
                       34     
-0042 D9FA             35                     DJNZ R1, DLY1
+0044 D9FA             35                     DJNZ R1, DLY1
                       36     
-0044 DBF6             37                     DJNZ R3, DLY0
-                      38                     
-0046 D8F1             39                     DJNZ R0, BOUNCE
-0048 DCEE             40                     DJNZ R4, NORM
-                      41     
-004A 80EA             42                     SJMP    LOOP
-                      43     
-                      44     END
-A51 MACRO ASSEMBLER  LAB5TASK1                                                            10/03/2014 10:41:35 PAGE     2
+0046 DBF6             37                     DJNZ R3, DLY0
+0048 22               38                     RET
+                      39     
+                      40     END
+A51 MACRO ASSEMBLER  LAB5TASK1                                                            10/03/2014 10:44:25 PAGE     2
 
 SYMBOL TABLE LISTING
 ------ ----- -------
@@ -59,13 +55,12 @@ SYMBOL TABLE LISTING
 
 N A M E             T Y P E  V A L U E   ATTRIBUTES
 
-BOUNCE . . . . . .  C ADDR   0039H   A   
-DLY0 . . . . . . .  C ADDR   003CH   A   
-DLY1 . . . . . . .  C ADDR   003EH   A   
-DLY2 . . . . . . .  C ADDR   0040H   A   
+DELAY. . . . . . .  C ADDR   003CH   A   
+DLY0 . . . . . . .  C ADDR   003EH   A   
+DLY1 . . . . . . .  C ADDR   0040H   A   
+DLY2 . . . . . . .  C ADDR   0042H   A   
 LOOP . . . . . . .  C ADDR   0036H   A   
 MAIN . . . . . . .  C ADDR   0030H   A   
-NORM . . . . . . .  C ADDR   0038H   A   
 P1 . . . . . . . .  D ADDR   0090H   A   
 
 
