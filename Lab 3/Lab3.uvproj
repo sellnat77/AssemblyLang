@@ -363,9 +363,9 @@
           <GroupName>Source Group 1</GroupName>
           <Files>
             <File>
-              <FileName>Lab3Task1.a51</FileName>
+              <FileName>Lab3Task2.a51</FileName>
               <FileType>2</FileType>
-              <FilePath>.\Lab3Task1.a51</FilePath>
+              <FilePath>.\Lab3Task2.a51</FilePath>
             </File>
           </Files>
         </Group>

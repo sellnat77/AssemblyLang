@@ -1,0 +1,72 @@
+A51 MACRO ASSEMBLER  LAB4TASK1                                                            10/02/2014 22:11:49 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02b
+OBJECT MODULE PLACED IN lab4Task1.OBJ
+ASSEMBLER INVOKED BY: G:\Keil_v5\C51\BIN\A51.EXE lab4Task1.a51 SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ; This program is called "My Little Chasing Cat".
+                       2     
+                       3     ; 1. Type in the program, compile and simulate it.
+                       4     
+                       5     ; 2. Observe what happens on port P1
+                       6     
+                       7     ; "My Little Chasing Cat".
+                       8     
+0000                   9     ORG     0000H
+                      10     
+0000 020030           11     LJMP MAIN
+                      12     
+0030                  13     ORG 0030H
+                      14     
+0030                  15     MAIN:
+                      16     
+0030 7401             17     MOV A, #01H
+0032 7800             18     MOV R0,#00H
+                      19     
+0034 F590             20     LOOP: MOV P1, A
+                      21     
+0036 B80803           22     CJNE R0,#08H,BOUNCE
+0039 7800             23     MOV R0, #00H
+003B 03               24     RR A
+003C 23               25     BOUNCE: RL A
+003D 08               26                     INC R0
+                      27                     
+003E 7BFF             28     MOV R3, #0FFH
+                      29     
+0040 79FF             30     DLY0: MOV R1, #0FFH
+                      31     
+0042 7AFF             32     DLY1: MOV R2, #0FFH
+                      33     
+0044 DAFE             34     DLY2: DJNZ R2, DLY2
+                      35     
+0046 D9FA             36     DJNZ R1, DLY1
+                      37     
+0048 DBF6             38     DJNZ R3, DLY0
+                      39     
+004A 80E8             40     SJMP    LOOP
+                      41     
+                      42     END
+A51 MACRO ASSEMBLER  LAB4TASK1                                                            10/02/2014 22:11:49 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+BOUNCE . . . . . .  C ADDR   003CH   A   
+DLY0 . . . . . . .  C ADDR   0040H   A   
+DLY1 . . . . . . .  C ADDR   0042H   A   
+DLY2 . . . . . . .  C ADDR   0044H   A   
+LOOP . . . . . . .  C ADDR   0034H   A   
+MAIN . . . . . . .  C ADDR   0030H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
