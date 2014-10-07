@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  LAB5TASK1                                                            10/03/2014 11:29:58 PAGE     1
+A51 MACRO ASSEMBLER  LAB5TASK1                                                            10/07/2014 11:44:06 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.02b
@@ -19,37 +19,46 @@ LOC  OBJ            LINE     SOURCE
 0000 020030           10     LJMP MAIN
 0030                  11     ORG 0030H
                       12     
-0030 7401             13     MAIN:   MOV A, #01H
-                      14     
-                      15     
-0032                  16     LOOP:   
-0032 1143             17                     ACALL BOUNCE
-                      18     
-0034 80FC             19                     SJMP    LOOP
-                      20                     
-0036 7B1F             21     DELAY:  MOV R3, #01FH
-0038 79FF             22     DLY0:   MOV R1, #0FFH
-003A 7AFF             23     DLY1:   MOV R2, #0FFH
-003C DAFE             24     DLY2:   DJNZ R2, DLY2
-003E D9FA             25                     DJNZ R1, DLY1
-0040 DBF6             26                     DJNZ R3, DLY0
-0042 22               27                     RET
-0043                  28     BOUNCE:         
-0043 7807             29                     MOV R0,#07H
-0045 7C07             30                     MOV R4,#07H
-                      31             
-0047 F590             32     AGAIN:  MOV P1, A
-0049 23               33                     RL A
-004A 1136             34                     ACALL DELAY
-004C D8F9             35                     DJNZ R0,AGAIN
-004E F590             36     NEXT:   MOV P1, A
-0050 03               37                     RR A
-0051 1136             38                     ACALL DELAY
-0053 DCF9             39                     DJNZ R4,NEXT
-0055 22               40                     RET
-                      41                     
-                      42     END
-A51 MACRO ASSEMBLER  LAB5TASK1                                                            10/03/2014 11:29:58 PAGE     2
+0030 74FF             13     MAIN:   MOV A, #0FFH
+0032 F580             14                     MOV P0, A
+0034 E580             15                     MOV A,P0
+                      16     
+                      17     
+0036                  18     LOOP:   
+                      19     
+0036 115A             20     ON:             ACALL CHASE
+                      21                     
+                      22     
+0038 80FC             23                     SJMP    LOOP
+                      24                     
+003A 7B1F             25     DELAY:  MOV R3, #01FH
+003C 79FF             26     DLY0:   MOV R1, #0FFH
+003E 7AFF             27     DLY1:   MOV R2, #0FFH
+0040 DAFE             28     DLY2:   DJNZ R2, DLY2
+0042 D9FA             29                     DJNZ R1, DLY1
+0044 DBF6             30                     DJNZ R3, DLY0
+0046 22               31                     RET
+0047                  32     BOUNCE:         
+0047 7807             33                     MOV R0,#07H
+0049 7C07             34                     MOV R4,#07H
+                      35             
+004B F590             36     AGAIN:  MOV P1, A
+004D 23               37                     RL A
+004E 113A             38                     ACALL DELAY
+0050 D8F9             39                     DJNZ R0,AGAIN
+0052 F590             40     NEXT:   MOV P1, A
+0054 03               41                     RR A
+0055 113A             42                     ACALL DELAY
+0057 DCF9             43                     DJNZ R4,NEXT
+0059 22               44                     RET
+005A                  45     CHASE:          
+005A F590             46                     MOV P1, A
+005C 23               47                     RL A
+005D 113A             48                     ACALL DELAY
+005F 22               49                     RET
+                      50                     
+                      51     END
+A51 MACRO ASSEMBLER  LAB5TASK1                                                            10/07/2014 11:44:06 PAGE     2
 
 SYMBOL TABLE LISTING
 ------ ----- -------
@@ -57,15 +66,18 @@ SYMBOL TABLE LISTING
 
 N A M E             T Y P E  V A L U E   ATTRIBUTES
 
-AGAIN. . . . . . .  C ADDR   0047H   A   
-BOUNCE . . . . . .  C ADDR   0043H   A   
-DELAY. . . . . . .  C ADDR   0036H   A   
-DLY0 . . . . . . .  C ADDR   0038H   A   
-DLY1 . . . . . . .  C ADDR   003AH   A   
-DLY2 . . . . . . .  C ADDR   003CH   A   
-LOOP . . . . . . .  C ADDR   0032H   A   
+AGAIN. . . . . . .  C ADDR   004BH   A   
+BOUNCE . . . . . .  C ADDR   0047H   A   
+CHASE. . . . . . .  C ADDR   005AH   A   
+DELAY. . . . . . .  C ADDR   003AH   A   
+DLY0 . . . . . . .  C ADDR   003CH   A   
+DLY1 . . . . . . .  C ADDR   003EH   A   
+DLY2 . . . . . . .  C ADDR   0040H   A   
+LOOP . . . . . . .  C ADDR   0036H   A   
 MAIN . . . . . . .  C ADDR   0030H   A   
-NEXT . . . . . . .  C ADDR   004EH   A   
+NEXT . . . . . . .  C ADDR   0052H   A   
+ON . . . . . . . .  C ADDR   0036H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
 P1 . . . . . . . .  D ADDR   0090H   A   
 
 
