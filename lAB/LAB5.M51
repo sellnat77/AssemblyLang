@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22                                                        10/07/2014  11:44:06  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22                                                        10/10/2014  09:27:28  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
@@ -19,7 +19,7 @@ LINK MAP OF MODULE:  LAB5 (LAB5TASK1)
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
-            CODE    0000H     0060H     ABSOLUTE     
+            CODE    0000H     0067H     ABSOLUTE     
 
 
 
@@ -29,55 +29,59 @@ SYMBOL TABLE OF MODULE:  LAB5 (LAB5TASK1)
   ----------------------------------
 
   -------         MODULE        LAB5TASK1
-  C:004BH         SYMBOL        AGAIN
-  C:0047H         SYMBOL        BOUNCE
-  C:005AH         SYMBOL        CHASE
-  C:003AH         SYMBOL        DELAY
-  C:003CH         SYMBOL        DLY0
-  C:003EH         SYMBOL        DLY1
-  C:0040H         SYMBOL        DLY2
-  C:0036H         SYMBOL        LOOP
+  C:004EH         SYMBOL        AGAIN
+  C:005FH         SYMBOL        AGN
+  C:004AH         SYMBOL        BOUNCE
+  C:005DH         SYMBOL        CHASE
+  C:003DH         SYMBOL        DELAY
+  C:003FH         SYMBOL        DLY0
+  C:0041H         SYMBOL        DLY1
+  C:0043H         SYMBOL        DLY2
+  C:0039H         SYMBOL        HERE
+  C:0034H         SYMBOL        LOOP
   C:0030H         SYMBOL        MAIN
-  C:0052H         SYMBOL        NEXT
-  C:0036H         SYMBOL        ON
+  C:0055H         SYMBOL        NEXT
   D:0080H         SYMBOL        P0
   D:0090H         SYMBOL        P1
   C:0000H         LINE#         10
   C:0030H         LINE#         13
   C:0032H         LINE#         14
-  C:0034H         LINE#         15
-  C:0036H         LINE#         20
-  C:0038H         LINE#         23
-  C:003AH         LINE#         25
-  C:003CH         LINE#         26
-  C:003EH         LINE#         27
-  C:0040H         LINE#         28
-  C:0042H         LINE#         29
-  C:0044H         LINE#         30
-  C:0046H         LINE#         31
-  C:0047H         LINE#         33
-  C:0049H         LINE#         34
-  C:004BH         LINE#         36
-  C:004DH         LINE#         37
-BL51 BANKED LINKER/LOCATER V6.22                                                      10/07/2014  11:44:06  PAGE 2
+  C:0034H         LINE#         17
+  C:0037H         LINE#         18
+  C:0039H         LINE#         20
+  C:003BH         LINE#         23
+  C:003DH         LINE#         25
+  C:003FH         LINE#         26
+  C:0041H         LINE#         27
+  C:0043H         LINE#         28
+  C:0045H         LINE#         29
+  C:0047H         LINE#         30
+  C:0049H         LINE#         31
+  C:004AH         LINE#         33
+  C:004CH         LINE#         34
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/10/2014  09:27:28  PAGE 2
 
 
-  C:004EH         LINE#         38
-  C:0050H         LINE#         39
-  C:0052H         LINE#         40
-  C:0054H         LINE#         41
-  C:0055H         LINE#         42
-  C:0057H         LINE#         43
-  C:0059H         LINE#         44
-  C:005AH         LINE#         46
-  C:005CH         LINE#         47
-  C:005DH         LINE#         48
-  C:005FH         LINE#         49
+  C:004EH         LINE#         36
+  C:0050H         LINE#         37
+  C:0051H         LINE#         38
+  C:0053H         LINE#         39
+  C:0055H         LINE#         40
+  C:0057H         LINE#         41
+  C:0058H         LINE#         42
+  C:005AH         LINE#         43
+  C:005CH         LINE#         44
+  C:005DH         LINE#         46
+  C:005FH         LINE#         47
+  C:0061H         LINE#         48
+  C:0062H         LINE#         49
+  C:0064H         LINE#         50
+  C:0066H         LINE#         51
   -------         ENDMOD        LAB5TASK1
 
 ******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0033H BYTE ( 2%) *
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 003AH BYTE ( 2%) *
 ******************************************************************************
 
-Program Size: data=8.0 xdata=0 code=96
+Program Size: data=8.0 xdata=0 code=103
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
