@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  LAB5TASK1                                                            10/03/2014 10:44:25 PAGE     1
+A51 MACRO ASSEMBLER  LAB5TASK1                                                            10/10/2014 09:40:03 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.02b
@@ -16,38 +16,46 @@ LOC  OBJ            LINE     SOURCE
                        7     ; "My Little Chasing Cat".
                        8     
 0000                   9     ORG     0000H
-                      10     
-0000 020030           11     LJMP MAIN
+0000 020030           10     LJMP MAIN
+0030                  11     ORG 0030H
                       12     
-0030                  13     ORG 0030H
-                      14     
-0030                  15     MAIN:
-                      16     
-0030 7401             17                     MOV A, #01H
-0032 7808             18                     MOV R0,#08H
-0034 7C08             19                     MOV R4,#08H
-                      20     
-0036 F590             21     LOOP:   MOV P1, A
-                      22                     
-0038 113C             23                     ACALL DELAY
-003A 80FA             24                     SJMP    LOOP
-                      25                     
-003C                  26     DELAY:
-003C 7BFF             27                     MOV R3, #0FFH
-                      28     
-003E 79FF             29     DLY0:   MOV R1, #0FFH
-                      30             
-0040 7AFF             31     DLY1:   MOV R2, #0FFH
-                      32     
-0042 DAFE             33     DLY2:   DJNZ R2, DLY2
-                      34     
-0044 D9FA             35                     DJNZ R1, DLY1
-                      36     
-0046 DBF6             37                     DJNZ R3, DLY0
-0048 22               38                     RET
-                      39     
-                      40     END
-A51 MACRO ASSEMBLER  LAB5TASK1                                                            10/03/2014 10:44:25 PAGE     2
+0030                  13     MAIN:   
+0030 D287             14                     SETB P0.7
+0032                  15     LOOP:   
+0032 308702           16                     JNB P0.7,PINON
+0035 1148             17                     ACALL BOUNC             
+0037 115D             18     PINON:  ACALL CHASE
+0039 80F7             19                     SJMP    LOOP
+                      20                     
+003B 7B1F             21     DELY:   MOV R3, #01FH
+003D 79FF             22     DLY0:   MOV R1, #0FFH
+003F 7AFF             23     DLY1:   MOV R2, #0FFH
+0041 DAFE             24     DLY2:   DJNZ R2, DLY2
+0043 D9FA             25                     DJNZ R1, DLY1
+0045 DBF6             26                     DJNZ R3, DLY0
+0047 22               27                     RET
+0048 7401             28     BOUNC:  MOV A,#01H      
+004A 7807             29                     MOV R0,#07H
+004C 7C07             30                     MOV R4,#07H     
+004E F590             31     MLEFT:  MOV P1, A
+0050 23               32                     RL A
+0051 113B             33                     ACALL DELY
+0053 D8F9             34                     DJNZ R0,MLEFT
+0055 F590             35     RIGHT:  MOV P1, A
+0057 03               36                     RR A
+0058 113B             37                     ACALL DELY
+005A DCF9             38                     DJNZ R4,RIGHT
+005C 22               39                     RET
+005D 7401             40     CHASE:  MOV A,#01H
+005F 7808             41                     MOV R0,#08H
+0061 F590             42     CLEFT:  MOV P1, A
+0063 23               43                     RL A
+0064 113B             44                     ACALL DELY
+0066 D8F9             45                     DJNZ R0,CLEFT
+0068 22               46                     RET
+                      47                     
+                      48     END
+A51 MACRO ASSEMBLER  LAB5TASK1                                                            10/10/2014 09:40:03 PAGE     2
 
 SYMBOL TABLE LISTING
 ------ ----- -------
@@ -55,13 +63,20 @@ SYMBOL TABLE LISTING
 
 N A M E             T Y P E  V A L U E   ATTRIBUTES
 
-DELAY. . . . . . .  C ADDR   003CH   A   
-DLY0 . . . . . . .  C ADDR   003EH   A   
-DLY1 . . . . . . .  C ADDR   0040H   A   
-DLY2 . . . . . . .  C ADDR   0042H   A   
-LOOP . . . . . . .  C ADDR   0036H   A   
+BOUNC. . . . . . .  C ADDR   0048H   A   
+CHASE. . . . . . .  C ADDR   005DH   A   
+CLEFT. . . . . . .  C ADDR   0061H   A   
+DELY . . . . . . .  C ADDR   003BH   A   
+DLY0 . . . . . . .  C ADDR   003DH   A   
+DLY1 . . . . . . .  C ADDR   003FH   A   
+DLY2 . . . . . . .  C ADDR   0041H   A   
+LOOP . . . . . . .  C ADDR   0032H   A   
 MAIN . . . . . . .  C ADDR   0030H   A   
+MLEFT. . . . . . .  C ADDR   004EH   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
 P1 . . . . . . . .  D ADDR   0090H   A   
+PINON. . . . . . .  C ADDR   0037H   A   
+RIGHT. . . . . . .  C ADDR   0055H   A   
 
 
 REGISTER BANK(S) USED: 0 
