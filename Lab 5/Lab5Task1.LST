@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  LAB5TASK1                                                            10/10/2014 10:26:51 PAGE     1
+A51 MACRO ASSEMBLER  LAB5TASK1                                                            10/10/2014 11:14:57 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.02b
@@ -15,11 +15,11 @@ LOC  OBJ            LINE     SOURCE
 0030 D287              6                     SETB P0.7 ;Set p0.7 as input
 0032                   7     LOOP:   
 0032 308702            8                     JNB P0.7,PINON ;Jump if p0.7 is on
-0035 1148              9                     ACALL BOUNC        ;Otherwise, bounce   
-0037 115D             10     PINON:  ACALL CHASE    ;Chase is p0.7 is on
+0035 1148              9     PINOF:  ACALL BOUNC        ;Otherwise, bounce   
+0037 1163             10     PINON:  ACALL CHASE    ;Chase is p0.7 is on
 0039 80F7             11                     SJMP    LOOP   ;Repeat forever
                       12                     
-003B 7B1F             13     DELY:   MOV R3, #01FH ;Delay function
+003B 7B0F             13     DELY:   MOV R3, #00FH ;Delay function
 003D 79FF             14     DLY0:   MOV R1, #0FFH
 003F 7AFF             15     DLY1:   MOV R2, #0FFH
 0041 DAFE             16     DLY2:   DJNZ R2, DLY2
@@ -31,27 +31,30 @@ LOC  OBJ            LINE     SOURCE
 004A 7807             22                     MOV R0,#07H ;2 Registers used to bounce left 
 004C 7C07             23                     MOV R4,#07H     ;Then right
                       24     
-004E F590             25     MLEFT:  MOV P1, A ;Rotate left 7 times
-0050 23               26                     RL A
-0051 113B             27                     ACALL DELY
-0053 D8F9             28                     DJNZ R0,MLEFT
-                      29     
-0055 F590             30     RIGHT:  MOV P1, A ;Rotate right 7 times
-0057 03               31                     RR A
-0058 113B             32                     ACALL DELY
-005A DCF9             33                     DJNZ R4,RIGHT
-005C 22               34                     RET
-                      35     
-005D 7401             36     CHASE:  MOV A,#01H ;Reset A
-005F 7808             37                     MOV R0,#08H ;Rotate left 8 times to show the chase
-                      38     
-0061 F590             39     CLEFT:  MOV P1, A
-0063 23               40                     RL A
-0064 113B             41                     ACALL DELY
-0066 D8F9             42                     DJNZ R0,CLEFT
-0068 22               43                     RET
-                      44     END
-A51 MACRO ASSEMBLER  LAB5TASK1                                                            10/10/2014 10:26:51 PAGE     2
+004E 3087E6           25     MLEFT:  JNB P0.7,PINON
+0051 F590             26                     MOV P1, A ;Rotate left 7 times
+0053 23               27                     RL A
+0054 113B             28                     ACALL DELY
+0056 D8F6             29                     DJNZ R0,MLEFT
+                      30     
+0058 3087DC           31     RIGHT:  JNB P0.7,PINON
+005B F590             32                     MOV P1, A ;Rotate right 7 times
+005D 03               33                     RR A
+005E 113B             34                     ACALL DELY
+0060 DCF6             35                     DJNZ R4,RIGHT
+0062 22               36                     RET
+                      37     
+0063 7401             38     CHASE:  MOV A,#01H ;Reset A
+0065 7808             39                     MOV R0,#08H ;Rotate left 8 times to show the chase
+                      40     
+0067 2087CB           41     CLEFT:  JB P0.7,PINOF
+006A F590             42                     MOV P1, A
+006C 23               43                     RL A
+006D 113B             44                     ACALL DELY
+006F D8F6             45                     DJNZ R0,CLEFT
+0071 22               46                     RET
+                      47     END
+A51 MACRO ASSEMBLER  LAB5TASK1                                                            10/10/2014 11:14:57 PAGE     2
 
 SYMBOL TABLE LISTING
 ------ ----- -------
@@ -60,8 +63,8 @@ SYMBOL TABLE LISTING
 N A M E             T Y P E  V A L U E   ATTRIBUTES
 
 BOUNC. . . . . . .  C ADDR   0048H   A   
-CHASE. . . . . . .  C ADDR   005DH   A   
-CLEFT. . . . . . .  C ADDR   0061H   A   
+CHASE. . . . . . .  C ADDR   0063H   A   
+CLEFT. . . . . . .  C ADDR   0067H   A   
 DELY . . . . . . .  C ADDR   003BH   A   
 DLY0 . . . . . . .  C ADDR   003DH   A   
 DLY1 . . . . . . .  C ADDR   003FH   A   
@@ -71,8 +74,9 @@ MAIN . . . . . . .  C ADDR   0030H   A
 MLEFT. . . . . . .  C ADDR   004EH   A   
 P0 . . . . . . . .  D ADDR   0080H   A   
 P1 . . . . . . . .  D ADDR   0090H   A   
+PINOF. . . . . . .  C ADDR   0035H   A   
 PINON. . . . . . .  C ADDR   0037H   A   
-RIGHT. . . . . . .  C ADDR   0055H   A   
+RIGHT. . . . . . .  C ADDR   0058H   A   
 
 
 REGISTER BANK(S) USED: 0 

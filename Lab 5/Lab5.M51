@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22                                                        10/10/2014  10:26:52  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22                                                        10/10/2014  11:14:58  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
@@ -19,7 +19,7 @@ LINK MAP OF MODULE:  LAB5 (LAB5TASK1)
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
-            CODE    0000H     0069H     ABSOLUTE     
+            CODE    0000H     0072H     ABSOLUTE     
 
 
 
@@ -30,8 +30,8 @@ SYMBOL TABLE OF MODULE:  LAB5 (LAB5TASK1)
 
   -------         MODULE        LAB5TASK1
   C:0048H         SYMBOL        BOUNC
-  C:005DH         SYMBOL        CHASE
-  C:0061H         SYMBOL        CLEFT
+  C:0063H         SYMBOL        CHASE
+  C:0067H         SYMBOL        CLEFT
   C:003BH         SYMBOL        DELY
   C:003DH         SYMBOL        DLY0
   C:003FH         SYMBOL        DLY1
@@ -41,8 +41,9 @@ SYMBOL TABLE OF MODULE:  LAB5 (LAB5TASK1)
   C:004EH         SYMBOL        MLEFT
   D:0080H         SYMBOL        P0
   D:0090H         SYMBOL        P1
+  C:0035H         SYMBOL        PINOF
   C:0037H         SYMBOL        PINON
-  C:0055H         SYMBOL        RIGHT
+  C:0058H         SYMBOL        RIGHT
   C:0000H         LINE#         2
   C:0030H         LINE#         6
   C:0032H         LINE#         8
@@ -58,31 +59,34 @@ SYMBOL TABLE OF MODULE:  LAB5 (LAB5TASK1)
   C:0047H         LINE#         19
   C:0048H         LINE#         21
   C:004AH         LINE#         22
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/10/2014  11:14:58  PAGE 2
+
+
   C:004CH         LINE#         23
-BL51 BANKED LINKER/LOCATER V6.22                                                      10/10/2014  10:26:52  PAGE 2
-
-
   C:004EH         LINE#         25
-  C:0050H         LINE#         26
-  C:0051H         LINE#         27
-  C:0053H         LINE#         28
-  C:0055H         LINE#         30
-  C:0057H         LINE#         31
-  C:0058H         LINE#         32
-  C:005AH         LINE#         33
-  C:005CH         LINE#         34
-  C:005DH         LINE#         36
-  C:005FH         LINE#         37
-  C:0061H         LINE#         39
-  C:0063H         LINE#         40
-  C:0064H         LINE#         41
-  C:0066H         LINE#         42
-  C:0068H         LINE#         43
+  C:0051H         LINE#         26
+  C:0053H         LINE#         27
+  C:0054H         LINE#         28
+  C:0056H         LINE#         29
+  C:0058H         LINE#         31
+  C:005BH         LINE#         32
+  C:005DH         LINE#         33
+  C:005EH         LINE#         34
+  C:0060H         LINE#         35
+  C:0062H         LINE#         36
+  C:0063H         LINE#         38
+  C:0065H         LINE#         39
+  C:0067H         LINE#         41
+  C:006AH         LINE#         42
+  C:006CH         LINE#         43
+  C:006DH         LINE#         44
+  C:006FH         LINE#         45
+  C:0071H         LINE#         46
   -------         ENDMOD        LAB5TASK1
 
 ******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 003CH BYTE ( 2%) *
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0045H BYTE ( 3%) *
 ******************************************************************************
 
-Program Size: data=8.0 xdata=0 code=105
+Program Size: data=8.0 xdata=0 code=114
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
