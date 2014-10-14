@@ -1,0 +1,141 @@
+A51 MACRO ASSEMBLER  PROJEFT1                                                             10/14/2014 10:50:12 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02b
+OBJECT MODULE PLACED IN Projeft1.OBJ
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE Projeft1.a51 SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1                     ORG 0000H
+0000                   2     MAIN:
+0000 1104              3                     ACALL MODE1
+                       4     
+0002 80FC              5                     SJMP MAIN
+                       6     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+0004                   7     MODE1:  ;Bouncing
+0004 7401              8                     MOV A, #01H     ;Reset A
+0006 7807              9                     MOV R0,#07H ;2 Registers used to bounce left 
+0008 7907             10                     MOV R1,#07H     ;Then right
+000A 1156             11     MLEFT:  ACALL MODECH
+000C F590             12                     MOV P1, A ;Rotate left 7 times
+000E 23               13                     RL A
+000F 1122             14                     ACALL PFIVE
+0011 D8F7             15                     DJNZ R0,MLEFT
+                      16     
+0013 1156             17     RIGHT:  ACALL MODECH
+0015 F590             18                     MOV P1, A ;Rotate right 7 times
+0017 03               19                     RR A
+0018 1122             20                     ACALL PFIVE
+001A D9F7             21                     DJNZ R1,RIGHT
+001C 22               22                     RET
+001D 22               23                     RET
+                      24                     
+                      25     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
+001E                  26     MODE2:  ;Counting
+001E 22               27                     RET
+                      28     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
+001F                  29     MODE3:  ;Double bouncing
+001F 22               30                     RET
+                      31     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
+0020                  32     MODE4:  ;Cyclic
+0020 22               33                     RET
+                      34     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
+0021                  35     OFF:    ;Flashing
+0021 22               36                     RET
+                      37     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
+0022                  38     PFIVE:  ;.5 sec delay
+0022 7F0F             39                     MOV R7, #00FH ;Delay function
+0024 7EFF             40     DLY00:  MOV R6, #0FFH
+0026 7DFF             41     DLY01:  MOV R5, #0FFH
+0028 DDFE             42     DLY02:  DJNZ R5, DLY02
+002A DEFA             43                     DJNZ R6, DLY01
+002C DFF6             44                     DJNZ R7, DLY00
+002E 22               45                     RET
+                      46     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
+002F                  47     ONE:    ;1 dec delay
+002F 7F0F             48                     MOV R7, #00FH ;Delay function
+0031 7EFF             49     DLY10:  MOV R6, #0FFH
+0033 7DFF             50     DLY11:  MOV R5, #0FFH
+0035 DDFE             51     DLY12:  DJNZ R5, DLY12
+0037 DEFA             52                     DJNZ R6, DLY11
+0039 DFF6             53                     DJNZ R7, DLY10
+003B 22               54                     RET
+                      55     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
+003C                  56     ONEFI:  ;1.5 sec delay
+003C 7F0F             57                     MOV R7, #00FH ;Delay function
+003E 7EFF             58     DLY20:  MOV R6, #0FFH
+A51 MACRO ASSEMBLER  PROJEFT1                                                             10/14/2014 10:50:12 PAGE     2
+
+0040 7DFF             59     DLY21:  MOV R5, #0FFH
+0042 DDFE             60     DLY22:  DJNZ R5, DLY22
+0044 DEFA             61                     DJNZ R6, DLY21
+0046 DFF6             62                     DJNZ R7, DLY20
+0048 22               63                     RET
+                      64     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
+0049                  65     TWO:    ;2 sec delay
+0049 7F0F             66                     MOV R7, #00FH ;Delay function
+004B 7EFF             67     DLY30:  MOV R6, #0FFH
+004D 7DFF             68     DLY31:  MOV R5, #0FFH
+004F DDFE             69     DLY32:  DJNZ R5, DLY32
+0051 DEFA             70                     DJNZ R6, DLY31
+0053 DFF6             71                     DJNZ R7, DLY30
+0055 22               72                     RET
+                      73     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
+0056                  74     MODECH: ;Select mode based on pin
+0056 2080AB           75                     JB P0.0,MODE1
+0059 2081C2           76                     JB P0.1,MODE2
+005C 2082C0           77                     JB P0.2,MODE3
+005F 2083BE           78                     JB P0.3,MODE4
+0062 22               79                     RET
+                      80     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
+0063                  81     DELAYCH:        ;Select delay based on pin
+0063 2084BC           82                     JB P0.4,PFIVE
+0066 2085C6           83                     JB P0.5,ONE
+0069 2086D0           84                     JB P0.6,ONEFI
+006C 2087DA           85                     JB P0.7,TWO
+006F 22               86                     RET
+                      87     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                      88     END
+A51 MACRO ASSEMBLER  PROJEFT1                                                             10/14/2014 10:50:12 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAYCH. . . . . .  C ADDR   0063H   A   
+DLY00. . . . . . .  C ADDR   0024H   A   
+DLY01. . . . . . .  C ADDR   0026H   A   
+DLY02. . . . . . .  C ADDR   0028H   A   
+DLY10. . . . . . .  C ADDR   0031H   A   
+DLY11. . . . . . .  C ADDR   0033H   A   
+DLY12. . . . . . .  C ADDR   0035H   A   
+DLY20. . . . . . .  C ADDR   003EH   A   
+DLY21. . . . . . .  C ADDR   0040H   A   
+DLY22. . . . . . .  C ADDR   0042H   A   
+DLY30. . . . . . .  C ADDR   004BH   A   
+DLY31. . . . . . .  C ADDR   004DH   A   
+DLY32. . . . . . .  C ADDR   004FH   A   
+MAIN . . . . . . .  C ADDR   0000H   A   
+MLEFT. . . . . . .  C ADDR   000AH   A   
+MODE1. . . . . . .  C ADDR   0004H   A   
+MODE2. . . . . . .  C ADDR   001EH   A   
+MODE3. . . . . . .  C ADDR   001FH   A   
+MODE4. . . . . . .  C ADDR   0020H   A   
+MODECH . . . . . .  C ADDR   0056H   A   
+OFF. . . . . . . .  C ADDR   0021H   A   
+ONE. . . . . . . .  C ADDR   002FH   A   
+ONEFI. . . . . . .  C ADDR   003CH   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+PFIVE. . . . . . .  C ADDR   0022H   A   
+RIGHT. . . . . . .  C ADDR   0013H   A   
+TWO. . . . . . . .  C ADDR   0049H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
