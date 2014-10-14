@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  PROJEFT1                                                             10/14/2014 10:50:12 PAGE     1
+A51 MACRO ASSEMBLER  PROJEFT1                                                             10/14/2014 11:40:16 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.02b
@@ -9,95 +9,135 @@ LOC  OBJ            LINE     SOURCE
 
 0000                   1                     ORG 0000H
 0000                   2     MAIN:
-0000 1104              3                     ACALL MODE1
-                       4     
-0002 80FC              5                     SJMP MAIN
-                       6     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-0004                   7     MODE1:  ;Bouncing
-0004 7401              8                     MOV A, #01H     ;Reset A
-0006 7807              9                     MOV R0,#07H ;2 Registers used to bounce left 
-0008 7907             10                     MOV R1,#07H     ;Then right
-000A 1156             11     MLEFT:  ACALL MODECH
-000C F590             12                     MOV P1, A ;Rotate left 7 times
-000E 23               13                     RL A
-000F 1122             14                     ACALL PFIVE
-0011 D8F7             15                     DJNZ R0,MLEFT
-                      16     
-0013 1156             17     RIGHT:  ACALL MODECH
-0015 F590             18                     MOV P1, A ;Rotate right 7 times
-0017 03               19                     RR A
-0018 1122             20                     ACALL PFIVE
-001A D9F7             21                     DJNZ R1,RIGHT
-001C 22               22                     RET
-001D 22               23                     RET
-                      24                     
-                      25     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
-001E                  26     MODE2:  ;Counting
-001E 22               27                     RET
-                      28     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
-001F                  29     MODE3:  ;Double bouncing
-001F 22               30                     RET
-                      31     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
-0020                  32     MODE4:  ;Cyclic
-0020 22               33                     RET
-                      34     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
-0021                  35     OFF:    ;Flashing
-0021 22               36                     RET
-                      37     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
-0022                  38     PFIVE:  ;.5 sec delay
-0022 7F0F             39                     MOV R7, #00FH ;Delay function
-0024 7EFF             40     DLY00:  MOV R6, #0FFH
-0026 7DFF             41     DLY01:  MOV R5, #0FFH
-0028 DDFE             42     DLY02:  DJNZ R5, DLY02
-002A DEFA             43                     DJNZ R6, DLY01
-002C DFF6             44                     DJNZ R7, DLY00
-002E 22               45                     RET
+0000 D280              3                     SETB P0.0
+0002 D281              4                     SETB P0.1
+0004 D282              5                     SETB P0.2
+0006 D283              6                     SETB P0.3
+0008 D284              7                     SETB P0.4
+000A D285              8                     SETB P0.5
+000C D286              9                     SETB P0.6
+000E D287             10                     SETB P0.7
+                      11                     
+0010                  12     LOOP:           
+0010 120078           13                     LCALL MODECH
+                      14     
+0013 80FB             15                     SJMP LOOP
+                      16     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+0015                  17     MODE1:  ;Bouncing
+0015 7401             18                     MOV A, #01H     ;Reset A
+0017 7807             19                     MOV R0,#07H ;2 Registers used to bounce left 
+0019 7907             20                     MOV R1,#07H     ;Then right
+001B                  21     MLEFT:  ;LCALL MODECH
+001B F590             22                     MOV P1, A ;Rotate left 7 times
+001D 23               23                     RL A
+001E 12009E           24                     LCALL DELAYCH
+0021 D8F8             25                     DJNZ R0,MLEFT
+0023                  26     RIGHT:  ;LCALL MODECH
+0023 F590             27                     MOV P1, A ;Rotate right 7 times
+0025 03               28                     RR A
+0026 12009E           29                     LCALL DELAYCH
+0029 D9F8             30                     DJNZ R1,RIGHT
+002B 22               31                     RET             
+                      32     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
+002C                  33     MODE2:  ;Counting
+002C E4               34                     CLR A
+002D 7AFF             35                     MOV R2,#0FFH
+002F                  36     AGAIN:  ;LCALL MODECH
+002F 04               37                     INC A
+0030 F590             38                     MOV P1,A
+0032 12009E           39                     LCALL DELAYCH
+0035 D8F8             40                     DJNZ R0,AGAIN
+0037 22               41                     RET
+                      42     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
+0038                  43     MODE3:  ;Double bouncing
+0038 120078           44                     LCALL MODECH
+003B 22               45                     RET
                       46     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
-002F                  47     ONE:    ;1 dec delay
-002F 7F0F             48                     MOV R7, #00FH ;Delay function
-0031 7EFF             49     DLY10:  MOV R6, #0FFH
-0033 7DFF             50     DLY11:  MOV R5, #0FFH
-0035 DDFE             51     DLY12:  DJNZ R5, DLY12
-0037 DEFA             52                     DJNZ R6, DLY11
-0039 DFF6             53                     DJNZ R7, DLY10
-003B 22               54                     RET
-                      55     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
-003C                  56     ONEFI:  ;1.5 sec delay
-003C 7F0F             57                     MOV R7, #00FH ;Delay function
-003E 7EFF             58     DLY20:  MOV R6, #0FFH
-A51 MACRO ASSEMBLER  PROJEFT1                                                             10/14/2014 10:50:12 PAGE     2
+003C                  47     MODE4:  ;Cyclic
+003C 120078           48                     LCALL MODECH
+003F 22               49                     RET
+                      50     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
+0040                  51     OFF:    ;Flashing
+0040 120078           52                     LCALL MODECH
+0043 22               53                     RET
+                      54     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
+0044                  55     PFIVE:  ;.5 sec delay
+0044 7F01             56                     MOV R7, #001H ;Delay function
+0046 7E0F             57     DLY50:  MOV R6, #00FH
+0048 7DFF             58     DLY51:  MOV R5, #0FFH
+A51 MACRO ASSEMBLER  PROJEFT1                                                             10/14/2014 11:40:16 PAGE     2
 
-0040 7DFF             59     DLY21:  MOV R5, #0FFH
-0042 DDFE             60     DLY22:  DJNZ R5, DLY22
-0044 DEFA             61                     DJNZ R6, DLY21
-0046 DFF6             62                     DJNZ R7, DLY20
-0048 22               63                     RET
-                      64     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
-0049                  65     TWO:    ;2 sec delay
-0049 7F0F             66                     MOV R7, #00FH ;Delay function
-004B 7EFF             67     DLY30:  MOV R6, #0FFH
-004D 7DFF             68     DLY31:  MOV R5, #0FFH
-004F DDFE             69     DLY32:  DJNZ R5, DLY32
-0051 DEFA             70                     DJNZ R6, DLY31
-0053 DFF6             71                     DJNZ R7, DLY30
-0055 22               72                     RET
-                      73     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
-0056                  74     MODECH: ;Select mode based on pin
-0056 2080AB           75                     JB P0.0,MODE1
-0059 2081C2           76                     JB P0.1,MODE2
-005C 2082C0           77                     JB P0.2,MODE3
-005F 2083BE           78                     JB P0.3,MODE4
-0062 22               79                     RET
-                      80     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
-0063                  81     DELAYCH:        ;Select delay based on pin
-0063 2084BC           82                     JB P0.4,PFIVE
-0066 2085C6           83                     JB P0.5,ONE
-0069 2086D0           84                     JB P0.6,ONEFI
-006C 2087DA           85                     JB P0.7,TWO
-006F 22               86                     RET
-                      87     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-                      88     END
-A51 MACRO ASSEMBLER  PROJEFT1                                                             10/14/2014 10:50:12 PAGE     3
+004A DDFE             59     DLY52:  DJNZ R5, DLY52
+004C DEFA             60                     DJNZ R6, DLY51
+004E DFF6             61                     DJNZ R7, DLY50
+0050 22               62                     RET
+                      63     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
+0051                  64     ONE:    ;1 dec delay
+0051 7F01             65                     MOV R7, #001H ;Delay function
+0053 7EAF             66     DLY10:  MOV R6, #0AFH
+0055 7DFF             67     DLY11:  MOV R5, #0FFH
+0057 DDFE             68     DLY12:  DJNZ R5, DLY12
+0059 DEFA             69                     DJNZ R6, DLY11
+005B DFF6             70                     DJNZ R7, DLY10
+005D 22               71                     RET
+                      72     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
+005E                  73     ONEFI:  ;1.5 sec delay
+005E 7F01             74                     MOV R7, #001H ;Delay function
+0060 7EFF             75     DLY150: MOV R6, #0FFH
+0062 7DFF             76     DLY151: MOV R5, #0FFH
+0064 DDFE             77     DLY152: DJNZ R5, DLY152
+0066 DEFA             78                     DJNZ R6, DLY151
+0068 DFF6             79                     DJNZ R7, DLY150
+006A 22               80                     RET
+                      81     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
+006B                  82     TWO:    ;2 sec delay
+006B 7F0F             83                     MOV R7, #00FH ;Delay function
+006D 7EFF             84     DLY20:  MOV R6, #0FFH
+006F 7DFF             85     DLY21:  MOV R5, #0FFH
+0071 DDFE             86     DLY22:  DJNZ R5, DLY22
+0073 DEFA             87                     DJNZ R6, DLY21
+0075 DFF6             88                     DJNZ R7, DLY20
+0077 22               89                     RET
+                      90     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
+0078                  91     MODECH: ;Select mode based on pin
+                      92                     
+0078 208009           93     RESET:  JB P0.0,BOUN            
+007B 20810B           94                     JB P0.1,COUN
+007E 20820D           95                     JB P0.2,CYC
+0081 20830F           96                     JB P0.3,DBLBOUN
+                      97                     
+0084 120015           98     BOUN:   LCALL MODE1     
+0087 80EF             99                     SJMP RESET
+0089 12002C          100     COUN:   LCALL MODE2             
+008C 80EA            101                     SJMP RESET
+008E 120038          102     CYC:    LCALL MODE3     
+0091 80E5            103                     SJMP RESET
+0093 12003C          104     DBLBOUN:LCALL MODE4     
+0096 80E0            105                     SJMP RESET
+0098 120040          106                     LCALL OFF
+009B 80DB            107                     SJMP RESET
+009D 22              108                     RET
+                     109     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
+009E                 110     DELAYCH:        ;Select delay based on pin
+009E 208409          111     TIME:   JB P0.4,POINT
+00A1 20850B          112                     JB P0.5,FULL
+00A4 20860D          113                     JB P0.6,FULLHAF
+00A7 20870F          114                     JB P0.7,TWOFULL
+                     115                     
+00AA 120044          116     POINT:  LCALL PFIVE
+00AD 80EF            117                     SJMP TIME
+00AF 120051          118     FULL:   LCALL ONE
+00B2 80EA            119                     SJMP TIME
+00B4 12005E          120     FULLHAF:LCALL ONEFI
+00B7 80E5            121                     SJMP TIME
+00B9 12006B          122     TWOFULL:LCALL TWO
+00BC 80E0            123                     SJMP TIME
+00BE 22              124                     RET
+A51 MACRO ASSEMBLER  PROJEFT1                                                             10/14/2014 11:40:16 PAGE     3
+
+                     125     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                     126     END
+A51 MACRO ASSEMBLER  PROJEFT1                                                             10/14/2014 11:40:16 PAGE     4
 
 SYMBOL TABLE LISTING
 ------ ----- -------
@@ -105,34 +145,46 @@ SYMBOL TABLE LISTING
 
 N A M E             T Y P E  V A L U E   ATTRIBUTES
 
-DELAYCH. . . . . .  C ADDR   0063H   A   
-DLY00. . . . . . .  C ADDR   0024H   A   
-DLY01. . . . . . .  C ADDR   0026H   A   
-DLY02. . . . . . .  C ADDR   0028H   A   
-DLY10. . . . . . .  C ADDR   0031H   A   
-DLY11. . . . . . .  C ADDR   0033H   A   
-DLY12. . . . . . .  C ADDR   0035H   A   
-DLY20. . . . . . .  C ADDR   003EH   A   
-DLY21. . . . . . .  C ADDR   0040H   A   
-DLY22. . . . . . .  C ADDR   0042H   A   
-DLY30. . . . . . .  C ADDR   004BH   A   
-DLY31. . . . . . .  C ADDR   004DH   A   
-DLY32. . . . . . .  C ADDR   004FH   A   
+AGAIN. . . . . . .  C ADDR   002FH   A   
+BOUN . . . . . . .  C ADDR   0084H   A   
+COUN . . . . . . .  C ADDR   0089H   A   
+CYC. . . . . . . .  C ADDR   008EH   A   
+DBLBOUN. . . . . .  C ADDR   0093H   A   
+DELAYCH. . . . . .  C ADDR   009EH   A   
+DLY10. . . . . . .  C ADDR   0053H   A   
+DLY11. . . . . . .  C ADDR   0055H   A   
+DLY12. . . . . . .  C ADDR   0057H   A   
+DLY150 . . . . . .  C ADDR   0060H   A   
+DLY151 . . . . . .  C ADDR   0062H   A   
+DLY152 . . . . . .  C ADDR   0064H   A   
+DLY20. . . . . . .  C ADDR   006DH   A   
+DLY21. . . . . . .  C ADDR   006FH   A   
+DLY22. . . . . . .  C ADDR   0071H   A   
+DLY50. . . . . . .  C ADDR   0046H   A   
+DLY51. . . . . . .  C ADDR   0048H   A   
+DLY52. . . . . . .  C ADDR   004AH   A   
+FULL . . . . . . .  C ADDR   00AFH   A   
+FULLHAF. . . . . .  C ADDR   00B4H   A   
+LOOP . . . . . . .  C ADDR   0010H   A   
 MAIN . . . . . . .  C ADDR   0000H   A   
-MLEFT. . . . . . .  C ADDR   000AH   A   
-MODE1. . . . . . .  C ADDR   0004H   A   
-MODE2. . . . . . .  C ADDR   001EH   A   
-MODE3. . . . . . .  C ADDR   001FH   A   
-MODE4. . . . . . .  C ADDR   0020H   A   
-MODECH . . . . . .  C ADDR   0056H   A   
-OFF. . . . . . . .  C ADDR   0021H   A   
-ONE. . . . . . . .  C ADDR   002FH   A   
-ONEFI. . . . . . .  C ADDR   003CH   A   
+MLEFT. . . . . . .  C ADDR   001BH   A   
+MODE1. . . . . . .  C ADDR   0015H   A   
+MODE2. . . . . . .  C ADDR   002CH   A   
+MODE3. . . . . . .  C ADDR   0038H   A   
+MODE4. . . . . . .  C ADDR   003CH   A   
+MODECH . . . . . .  C ADDR   0078H   A   
+OFF. . . . . . . .  C ADDR   0040H   A   
+ONE. . . . . . . .  C ADDR   0051H   A   
+ONEFI. . . . . . .  C ADDR   005EH   A   
 P0 . . . . . . . .  D ADDR   0080H   A   
 P1 . . . . . . . .  D ADDR   0090H   A   
-PFIVE. . . . . . .  C ADDR   0022H   A   
-RIGHT. . . . . . .  C ADDR   0013H   A   
-TWO. . . . . . . .  C ADDR   0049H   A   
+PFIVE. . . . . . .  C ADDR   0044H   A   
+POINT. . . . . . .  C ADDR   00AAH   A   
+RESET. . . . . . .  C ADDR   0078H   A   
+RIGHT. . . . . . .  C ADDR   0023H   A   
+TIME . . . . . . .  C ADDR   009EH   A   
+TWO. . . . . . . .  C ADDR   006BH   A   
+TWOFULL. . . . . .  C ADDR   00B9H   A   
 
 
 REGISTER BANK(S) USED: 0 
