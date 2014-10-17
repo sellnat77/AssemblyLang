@@ -23,7 +23,7 @@ SKIP:
 		RL A
 		;LCALL DELAYCH
 		ACALL CHDELAY
-		LCALL DELAY
+		ACALL DELAY
 		
 		DJNZ R0,MLEFT
 RIGHT:	JB P0.0,BSKIP
@@ -32,7 +32,7 @@ BSKIP:
 		MOV P1, A ;Rotate right 7 times
 		RR A
 		ACALL CHDELAY
-		LCALL DELAY
+		ACALL DELAY
 		DJNZ R1,RIGHT
 		RET		
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;		
@@ -47,7 +47,7 @@ CSKIP:
 		MOV P1,A
 		
 		ACALL CHDELAY
-		LCALL DELAY
+		ACALL DELAY
 
 		DJNZ R4,AGAIN
 		RET
@@ -97,12 +97,11 @@ DDSKIP:
 		RET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;		
 MODE4:	;Cyclic
-	
-		CLR A
+		MOV A,#00H
 		MOV P1,A
 		ACALL CHDELAY
-		LCALL DELAY	
-		MOV A,#128
+		ACALL DELAY	
+		MOV A,#128D
 		MOV R4,#08H
 		
 NEXT:	
@@ -116,9 +115,8 @@ CYSKIP:
 		RR A
 		ORL A,P1
 		ACALL CHDELAY
-		LCALL DELAY
+		ACALL DELAY
 		DJNZ R4,NEXT
-		CLR A
 		RET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;		
 OFF:	;Flashing lights
@@ -130,7 +128,7 @@ OFF:	;Flashing lights
 		ACALL CHDELAY
 		MOV A,#0FFH
 		MOV P1,A
-		LCALL DELAY
+		ACALL DELAY
 		CLR A
 		MOV P1,A
 ON:		
