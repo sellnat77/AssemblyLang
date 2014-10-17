@@ -31,7 +31,6 @@ RIGHT:	JB P0.0,BSKIP
 BSKIP:
 		MOV P1, A ;Rotate right 7 times
 		RR A
-		;LCALL DELAYCH
 		ACALL CHDELAY
 		LCALL DELAY
 		DJNZ R1,RIGHT
@@ -39,9 +38,10 @@ BSKIP:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;		
 MODE2:	;Counting
 		CLR A
-		MOV R2,#0FFH
-AGAIN:	JB P0.1,CSKIP
-		ACALL CHOOSE
+		MOV R4,#0FFH
+AGAIN:	JB P0.0,CFORCE
+		JB P0.1,CSKIP
+CFORCE: ACALL CHOOSE
 CSKIP:
 		INC A
 		MOV P1,A
@@ -49,22 +49,22 @@ CSKIP:
 		ACALL CHDELAY
 		LCALL DELAY
 
-		DJNZ R0,AGAIN
+		DJNZ R4,AGAIN
 		RET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;		
 MODE3:	;Double bouncing
-
-		CLR A
 		MOV R0,#128
 		MOV R1,#001
-		MOV R2,#003
+		MOV R2,#004
 DBLIN:	
+		JB P0.1,DDFORCE
+		JB P0.0,DDFORCE
 		JB P0.2,DSKIP
-		ACALL CHOOSE
-DSKIP:	
-		ACALL CHDELAY
+DDFORCE: ACALL CHOOSE
+DSKIP:
 		MOV A,R0
 		ORL A,R1
+		ACALL CHDELAY		
 		ACALL DELAY
 		MOV P1,A
 		MOV A,R0
@@ -74,14 +74,17 @@ DSKIP:
 		RL A
 		MOV R1,A
 		DJNZ R2,DBLIN
+		MOV R2,#004
 DBLOUT: 
+		JB P0.1,DFORCE
+		JB P0.0,DFORCE
 		JB P0.2,DDSKIP
-		ACALL CHOOSE
+DFORCE: ACALL CHOOSE
 DDSKIP:	
-		MOV R2,#003
-		ACALL CHDELAY
+		
 		MOV A,R0
 		ORL A,R1
+		ACALL CHDELAY		
 		ACALL DELAY
 		MOV P1,A
 		MOV A,R0
@@ -94,20 +97,28 @@ DDSKIP:
 		RET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;		
 MODE4:	;Cyclic
+	
+		CLR A
+		MOV P1,A
+		ACALL CHDELAY
+		LCALL DELAY	
+		MOV A,#128
+		MOV R4,#08H
 		
-		MOV A,#01H
-		MOV R0,#08H
-		
-NEXT:	JB P0.3,CYSKIP
-		ACALL CHOOSE
+NEXT:	
+		JB P0.2,FORCE
+		JB P0.1,FORCE
+		JB P0.0,FORCE
+		JB P0.3,CYSKIP
+FORCE:	ACALL CHOOSE
 CYSKIP:
 		MOV P1,A
-		MOV R1,P1
-		RL A
+		RR A
 		ORL A,P1
 		ACALL CHDELAY
 		LCALL DELAY
-		DJNZ R0,NEXT
+		DJNZ R4,NEXT
+		CLR A
 		RET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;		
 OFF:	;Flashing lights
@@ -130,7 +141,7 @@ PFIVE: 	;.5 sec delay
 		RET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;		
 ONE:	;1 dec delay
-		MOV R7, #0FH ;Delay function
+		MOV R7, #0EH ;Delay function
 		RET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;		
 ONEFI:	;1.5 sec delay
@@ -138,7 +149,7 @@ ONEFI:	;1.5 sec delay
 		RET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;		
 TWO:	;2 sec delay
-		MOV R7, #01DH ;Delay function
+		MOV R7, #01CH ;Delay function
 		RET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 DELAY:
@@ -168,12 +179,13 @@ CYC:	ACALL MODE4
 BOT:	RET		
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 CHDELAY:
+		JB P0.4,CPFI
 		JB P0.5, CONE
 		JB P0.6, CONEFI
-		JB P0.7, CTWO
-		
-		ACALL PFIVE
+			
+		ACALL TWO
 		SJMP ENDTIME
+CPFI:	ACALL PFIVE
 CONE:	ACALL ONE
 		SJMP ENDTIME
 CONEFI: ACALL ONEFI
