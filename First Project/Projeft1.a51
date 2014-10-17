@@ -9,9 +9,7 @@ MAIN:
 		SETB P0.6
 		SETB P0.7
 LOOP:
-		ACALL CHOOSE
-
-		
+		ACALL CHOOSE		
 		SJMP LOOP
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 MODE1:	;Bouncing
@@ -21,19 +19,6 @@ MODE1:	;Bouncing
 MLEFT:	JB P0.0,SKIP	
 		ACALL CHOOSE
 SKIP:		
-;		JB P0.1,BCOUN		
-;		JB P0.2,BCYC
-;		JB P0.3,BDBLBOUN
-;		SJMP LEND
-;		
-;BCOUN:	LCALL MODE2	
-;		SJMP LEND
-;BCYC:	LCALL MODE3	
-;		SJMP LEND
-;BDBLBOUN:LCALL MODE4	
-;		SJMP LEND
-;		LCALL OFF
-;LEND:
 		MOV P1, A ;Rotate left 7 times
 		RL A
 		;LCALL DELAYCH
@@ -44,19 +29,6 @@ SKIP:
 RIGHT:	JB P0.0,BSKIP
 		ACALL CHOOSE
 BSKIP:
-;		JB P0.1,BBCOUN		
-;		JB P0.2,BBCYC
-;		JB P0.3,BBDBLBOUN
-;		SJMP BLEND
-;		
-;BBCOUN:	LCALL MODE2	
-;		SJMP BLEND
-;BBCYC:	LCALL MODE3	
-;		SJMP BLEND
-;BBDBLBOUN:LCALL MODE4	
-;		SJMP BLEND
-;		LCALL OFF
-;BLEND:
 		MOV P1, A ;Rotate right 7 times
 		RR A
 		;LCALL DELAYCH
@@ -71,19 +43,6 @@ MODE2:	;Counting
 AGAIN:	JB P0.1,CSKIP
 		ACALL CHOOSE
 CSKIP:
-;		JB P0.0,CBOUN		
-;		JB P0.2,CCYC
-;		JB P0.3,CDBLBOUN
-;		SJMP CLEND
-;		
-;CBOUN:	LCALL MODE1	
-;		SJMP CLEND
-;CCYC:	LCALL MODE3	
-;		SJMP CLEND
-;CDBLBOUN:LCALL MODE4	
-;		SJMP CLEND
-;		LCALL OFF
-;CLEND:
 		INC A
 		MOV P1,A
 		
@@ -94,13 +53,48 @@ CSKIP:
 		RET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;		
 MODE3:	;Double bouncing
-		;LCALL MODECH
+
+		CLR A
+		MOV R0,#128
+		MOV R1,#001
+		MOV R2,#003
+DBLIN:	
+		JB P0.2,DSKIP
 		ACALL CHOOSE
+DSKIP:	
 		ACALL CHDELAY
+		MOV A,R0
+		ORL A,R1
+		ACALL DELAY
+		MOV P1,A
+		MOV A,R0
+		RR A
+		MOV R0,A
+		MOV A,R1
+		RL A
+		MOV R1,A
+		DJNZ R2,DBLIN
+DBLOUT: 
+		JB P0.2,DDSKIP
+		ACALL CHOOSE
+DDSKIP:	
+		MOV R2,#003
+		ACALL CHDELAY
+		MOV A,R0
+		ORL A,R1
+		ACALL DELAY
+		MOV P1,A
+		MOV A,R0
+		RL A
+		MOV R0,A
+		MOV A,R1
+		RR A
+		MOV R1,A
+		DJNZ R2,DBLOUT
 		RET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;		
 MODE4:	;Cyclic
-		;LCALL MODECH
+		
 		MOV A,#01H
 		MOV R0,#08H
 		
@@ -114,37 +108,37 @@ CYSKIP:
 		ACALL CHDELAY
 		LCALL DELAY
 		DJNZ R0,NEXT
-		
 		RET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;		
-OFF:	;Flashing
-		;LCALL MODECH
-		CLR A
-		MOV R0,#01H
-TOP:	ACALL CHOOSE
+OFF:	;Flashing lights
+		JB P0.0, ON
+		JB P0.1, ON
+		JB P0.2, ON
+		JB P0.3, ON
+
 		ACALL CHDELAY
 		MOV A,#0FFH
 		MOV P1,A
 		LCALL DELAY
 		CLR A
 		MOV P1,A
-		DJNZ R0,TOP
+ON:		
 		RET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;		
 PFIVE: 	;.5 sec delay
-		MOV R7, #010H ;Delay function
+		MOV R7, #07H ;Delay function
 		RET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;		
 ONE:	;1 dec delay
-		MOV R7, #020H ;Delay function
+		MOV R7, #0FH ;Delay function
 		RET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;		
 ONEFI:	;1.5 sec delay
-		MOV R7, #04H ;Delay function
+		MOV R7, #015H ;Delay function
 		RET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;		
 TWO:	;2 sec delay
-		MOV R7, #080H ;Delay function
+		MOV R7, #01DH ;Delay function
 		RET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 DELAY:
@@ -160,7 +154,6 @@ CHOOSE:
 		JB P0.1, COUN
 		JB P0.2, DBL
 		JB P0.3, CYC
-		
 		
 		ACALL OFF
 		SJMP BOT
@@ -187,11 +180,4 @@ CONEFI: ACALL ONEFI
 		SJMP ENDTIME
 CTWO:	ACALL TWO
 ENDTIME: RET
-		
 END
-	
-;JB 2
-;LCALL 1
-;SJMP TOP
-;LABEL 2 CALL 2
-;SJMP TOP
