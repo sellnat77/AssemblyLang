@@ -74,7 +74,7 @@ DSKIP:
 		RL A
 		MOV R1,A
 		DJNZ R2,DBLIN
-		MOV R2,#004
+		MOV R2,#003
 DBLOUT: 
 		JB P0.1,DFORCE
 		JB P0.0,DFORCE
@@ -97,11 +97,11 @@ DDSKIP:
 		RET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;		
 MODE4:	;Cyclic
-		MOV A,#00H
-		MOV P1,A
+
 		ACALL CHDELAY
 		ACALL DELAY	
-		MOV A,#128D
+		MOV R0,#80H
+		MOV A,R0
 		MOV R4,#08H
 		
 NEXT:	
@@ -113,7 +113,7 @@ FORCE:	ACALL CHOOSE
 CYSKIP:
 		MOV P1,A
 		RR A
-		ORL A,P1
+		ORL A,R0
 		ACALL CHDELAY
 		ACALL DELAY
 		DJNZ R4,NEXT
