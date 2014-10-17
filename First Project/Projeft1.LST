@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  PROJEFT1                                                             10/14/2014 11:40:16 PAGE     1
+A51 MACRO ASSEMBLER  PROJEFT1                                                             10/17/2014 10:12:48 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.02b
@@ -17,127 +17,200 @@ LOC  OBJ            LINE     SOURCE
 000A D285              8                     SETB P0.5
 000C D286              9                     SETB P0.6
 000E D287             10                     SETB P0.7
-                      11                     
-0010                  12     LOOP:           
-0010 120078           13                     LCALL MODECH
-                      14     
-0013 80FB             15                     SJMP LOOP
+0010                  11     LOOP:
+0010 1194             12                     ACALL CHOOSE
+                      13     
+                      14                     
+0012 80FC             15                     SJMP LOOP
                       16     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-0015                  17     MODE1:  ;Bouncing
-0015 7401             18                     MOV A, #01H     ;Reset A
-0017 7807             19                     MOV R0,#07H ;2 Registers used to bounce left 
-0019 7907             20                     MOV R1,#07H     ;Then right
-001B                  21     MLEFT:  ;LCALL MODECH
-001B F590             22                     MOV P1, A ;Rotate left 7 times
-001D 23               23                     RL A
-001E 12009E           24                     LCALL DELAYCH
-0021 D8F8             25                     DJNZ R0,MLEFT
-0023                  26     RIGHT:  ;LCALL MODECH
-0023 F590             27                     MOV P1, A ;Rotate right 7 times
-0025 03               28                     RR A
-0026 12009E           29                     LCALL DELAYCH
-0029 D9F8             30                     DJNZ R1,RIGHT
-002B 22               31                     RET             
-                      32     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
-002C                  33     MODE2:  ;Counting
-002C E4               34                     CLR A
-002D 7AFF             35                     MOV R2,#0FFH
-002F                  36     AGAIN:  ;LCALL MODECH
-002F 04               37                     INC A
-0030 F590             38                     MOV P1,A
-0032 12009E           39                     LCALL DELAYCH
-0035 D8F8             40                     DJNZ R0,AGAIN
-0037 22               41                     RET
-                      42     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
-0038                  43     MODE3:  ;Double bouncing
-0038 120078           44                     LCALL MODECH
-003B 22               45                     RET
-                      46     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
-003C                  47     MODE4:  ;Cyclic
-003C 120078           48                     LCALL MODECH
-003F 22               49                     RET
-                      50     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
-0040                  51     OFF:    ;Flashing
-0040 120078           52                     LCALL MODECH
-0043 22               53                     RET
-                      54     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
-0044                  55     PFIVE:  ;.5 sec delay
-0044 7F01             56                     MOV R7, #001H ;Delay function
-0046 7E0F             57     DLY50:  MOV R6, #00FH
-0048 7DFF             58     DLY51:  MOV R5, #0FFH
-A51 MACRO ASSEMBLER  PROJEFT1                                                             10/14/2014 11:40:16 PAGE     2
+0014                  17     MODE1:  ;Bouncing
+0014 7401             18                     MOV A, #01H     ;Reset A
+0016 7807             19                     MOV R0,#07H ;2 Registers used to bounce left 
+0018 7907             20                     MOV R1,#07H     ;Then right
+001A 208002           21     MLEFT:  JB P0.0,SKIP    
+001D 1194             22                     ACALL CHOOSE
+001F                  23     SKIP:           
+                      24     ;               JB P0.1,BCOUN           
+                      25     ;               JB P0.2,BCYC
+                      26     ;               JB P0.3,BDBLBOUN
+                      27     ;               SJMP LEND
+                      28     ;               
+                      29     ;BCOUN: LCALL MODE2     
+                      30     ;               SJMP LEND
+                      31     ;BCYC:  LCALL MODE3     
+                      32     ;               SJMP LEND
+                      33     ;BDBLBOUN:LCALL MODE4   
+                      34     ;               SJMP LEND
+                      35     ;               LCALL OFF
+                      36     ;LEND:
+001F F590             37                     MOV P1, A ;Rotate left 7 times
+0021 23               38                     RL A
+                      39                     ;LCALL DELAYCH
+0022 11B5             40                     ACALL CHDELAY
+0024 120089           41                     LCALL DELAY
+                      42                     
+0027 D8F1             43                     DJNZ R0,MLEFT
+0029 208002           44     RIGHT:  JB P0.0,BSKIP
+002C 1194             45                     ACALL CHOOSE
+002E                  46     BSKIP:
+                      47     ;               JB P0.1,BBCOUN          
+                      48     ;               JB P0.2,BBCYC
+                      49     ;               JB P0.3,BBDBLBOUN
+                      50     ;               SJMP BLEND
+                      51     ;               
+                      52     ;BBCOUN:        LCALL MODE2     
+                      53     ;               SJMP BLEND
+                      54     ;BBCYC: LCALL MODE3     
+                      55     ;               SJMP BLEND
+                      56     ;BBDBLBOUN:LCALL MODE4  
+                      57     ;               SJMP BLEND
+                      58     ;               LCALL OFF
+A51 MACRO ASSEMBLER  PROJEFT1                                                             10/17/2014 10:12:48 PAGE     2
 
-004A DDFE             59     DLY52:  DJNZ R5, DLY52
-004C DEFA             60                     DJNZ R6, DLY51
-004E DFF6             61                     DJNZ R7, DLY50
-0050 22               62                     RET
-                      63     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
-0051                  64     ONE:    ;1 dec delay
-0051 7F01             65                     MOV R7, #001H ;Delay function
-0053 7EAF             66     DLY10:  MOV R6, #0AFH
-0055 7DFF             67     DLY11:  MOV R5, #0FFH
-0057 DDFE             68     DLY12:  DJNZ R5, DLY12
-0059 DEFA             69                     DJNZ R6, DLY11
-005B DFF6             70                     DJNZ R7, DLY10
-005D 22               71                     RET
-                      72     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
-005E                  73     ONEFI:  ;1.5 sec delay
-005E 7F01             74                     MOV R7, #001H ;Delay function
-0060 7EFF             75     DLY150: MOV R6, #0FFH
-0062 7DFF             76     DLY151: MOV R5, #0FFH
-0064 DDFE             77     DLY152: DJNZ R5, DLY152
-0066 DEFA             78                     DJNZ R6, DLY151
-0068 DFF6             79                     DJNZ R7, DLY150
-006A 22               80                     RET
-                      81     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
-006B                  82     TWO:    ;2 sec delay
-006B 7F0F             83                     MOV R7, #00FH ;Delay function
-006D 7EFF             84     DLY20:  MOV R6, #0FFH
-006F 7DFF             85     DLY21:  MOV R5, #0FFH
-0071 DDFE             86     DLY22:  DJNZ R5, DLY22
-0073 DEFA             87                     DJNZ R6, DLY21
-0075 DFF6             88                     DJNZ R7, DLY20
-0077 22               89                     RET
-                      90     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
-0078                  91     MODECH: ;Select mode based on pin
-                      92                     
-0078 208009           93     RESET:  JB P0.0,BOUN            
-007B 20810B           94                     JB P0.1,COUN
-007E 20820D           95                     JB P0.2,CYC
-0081 20830F           96                     JB P0.3,DBLBOUN
-                      97                     
-0084 120015           98     BOUN:   LCALL MODE1     
-0087 80EF             99                     SJMP RESET
-0089 12002C          100     COUN:   LCALL MODE2             
-008C 80EA            101                     SJMP RESET
-008E 120038          102     CYC:    LCALL MODE3     
-0091 80E5            103                     SJMP RESET
-0093 12003C          104     DBLBOUN:LCALL MODE4     
-0096 80E0            105                     SJMP RESET
-0098 120040          106                     LCALL OFF
-009B 80DB            107                     SJMP RESET
-009D 22              108                     RET
-                     109     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
-009E                 110     DELAYCH:        ;Select delay based on pin
-009E 208409          111     TIME:   JB P0.4,POINT
-00A1 20850B          112                     JB P0.5,FULL
-00A4 20860D          113                     JB P0.6,FULLHAF
-00A7 20870F          114                     JB P0.7,TWOFULL
-                     115                     
-00AA 120044          116     POINT:  LCALL PFIVE
-00AD 80EF            117                     SJMP TIME
-00AF 120051          118     FULL:   LCALL ONE
-00B2 80EA            119                     SJMP TIME
-00B4 12005E          120     FULLHAF:LCALL ONEFI
-00B7 80E5            121                     SJMP TIME
-00B9 12006B          122     TWOFULL:LCALL TWO
-00BC 80E0            123                     SJMP TIME
-00BE 22              124                     RET
-A51 MACRO ASSEMBLER  PROJEFT1                                                             10/14/2014 11:40:16 PAGE     3
+                      59     ;BLEND:
+002E F590             60                     MOV P1, A ;Rotate right 7 times
+0030 03               61                     RR A
+                      62                     ;LCALL DELAYCH
+0031 11B5             63                     ACALL CHDELAY
+0033 120089           64                     LCALL DELAY
+0036 D9F1             65                     DJNZ R1,RIGHT
+0038 22               66                     RET             
+                      67     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
+0039                  68     MODE2:  ;Counting
+0039 E4               69                     CLR A
+003A 7AFF             70                     MOV R2,#0FFH
+003C 208102           71     AGAIN:  JB P0.1,CSKIP
+003F 1194             72                     ACALL CHOOSE
+0041                  73     CSKIP:
+                      74     ;               JB P0.0,CBOUN           
+                      75     ;               JB P0.2,CCYC
+                      76     ;               JB P0.3,CDBLBOUN
+                      77     ;               SJMP CLEND
+                      78     ;               
+                      79     ;CBOUN: LCALL MODE1     
+                      80     ;               SJMP CLEND
+                      81     ;CCYC:  LCALL MODE3     
+                      82     ;               SJMP CLEND
+                      83     ;CDBLBOUN:LCALL MODE4   
+                      84     ;               SJMP CLEND
+                      85     ;               LCALL OFF
+                      86     ;CLEND:
+0041 04               87                     INC A
+0042 F590             88                     MOV P1,A
+                      89                     
+0044 11B5             90                     ACALL CHDELAY
+0046 120089           91                     LCALL DELAY
+                      92     
+0049 D8F1             93                     DJNZ R0,AGAIN
+004B 22               94                     RET
+                      95     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
+004C                  96     MODE3:  ;Double bouncing
+                      97                     ;LCALL MODECH
+004C 1194             98                     ACALL CHOOSE
+004E 11B5             99                     ACALL CHDELAY
+0050 22              100                     RET
+                     101     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
+0051                 102     MODE4:  ;Cyclic
+                     103                     ;LCALL MODECH
+0051 7401            104                     MOV A,#01H
+0053 7808            105                     MOV R0,#08H
+                     106                     
+0055 208302          107     NEXT:   JB P0.3,CYSKIP
+0058 1194            108                     ACALL CHOOSE
+005A                 109     CYSKIP:
+005A F590            110                     MOV P1,A
+005C A990            111                     MOV R1,P1
+005E 23              112                     RL A
+005F 4590            113                     ORL A,P1
+0061 11B5            114                     ACALL CHDELAY
+0063 120089          115                     LCALL DELAY
+0066 D8ED            116                     DJNZ R0,NEXT
+                     117                     
+0068 22              118                     RET
+                     119     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
+0069                 120     OFF:    ;Flashing
+                     121                     ;LCALL MODECH
+0069 E4              122                     CLR A
+006A 7801            123                     MOV R0,#01H
+006C 1194            124     TOP:    ACALL CHOOSE
+A51 MACRO ASSEMBLER  PROJEFT1                                                             10/17/2014 10:12:48 PAGE     3
 
-                     125     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-                     126     END
-A51 MACRO ASSEMBLER  PROJEFT1                                                             10/14/2014 11:40:16 PAGE     4
+006E 11B5            125                     ACALL CHDELAY
+0070 74FF            126                     MOV A,#0FFH
+0072 F590            127                     MOV P1,A
+0074 120089          128                     LCALL DELAY
+0077 E4              129                     CLR A
+0078 F590            130                     MOV P1,A
+007A D8F0            131                     DJNZ R0,TOP
+007C 22              132                     RET
+                     133     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
+007D                 134     PFIVE:  ;.5 sec delay
+007D 7F10            135                     MOV R7, #010H ;Delay function
+007F 22              136                     RET
+                     137     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
+0080                 138     ONE:    ;1 dec delay
+0080 7F20            139                     MOV R7, #020H ;Delay function
+0082 22              140                     RET
+                     141     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
+0083                 142     ONEFI:  ;1.5 sec delay
+0083 7F04            143                     MOV R7, #04H ;Delay function
+0085 22              144                     RET
+                     145     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                
+0086                 146     TWO:    ;2 sec delay
+0086 7F80            147                     MOV R7, #080H ;Delay function
+0088 22              148                     RET
+                     149     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+0089                 150     DELAY:
+0089 7EFF            151     DLY20:  MOV R6, #0FFH
+008B 7DFF            152     DLY21:  MOV R5, #0FFH
+008D DDFE            153     DLY22:  DJNZ R5, DLY22
+008F DEFA            154                     DJNZ R6, DLY21
+0091 DFF6            155                     DJNZ R7, DLY20
+0093 22              156                     RET
+                     157     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+0094                 158     CHOOSE:
+0094 20800D          159                     JB P0.0, BOUN
+0097 20810E          160                     JB P0.1, COUN
+009A 20820F          161                     JB P0.2, DBL
+009D 208310          162                     JB P0.3, CYC
+                     163                     
+                     164                     
+00A0 1169            165                     ACALL OFF
+00A2 8010            166                     SJMP BOT
+00A4 1114            167     BOUN:   ACALL MODE1
+00A6 800C            168                     SJMP BOT
+00A8 1139            169     COUN:   ACALL MODE2
+00AA 8008            170                     SJMP BOT
+00AC 114C            171     DBL:    ACALL MODE3
+00AE 8004            172                     SJMP BOT
+00B0 1151            173     CYC:    ACALL MODE4
+00B2 8000            174                     SJMP BOT
+00B4 22              175     BOT:    RET             
+                     176     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+00B5                 177     CHDELAY:
+00B5 20850A          178                     JB P0.5, CONE
+00B8 20860B          179                     JB P0.6, CONEFI
+00BB 20870C          180                     JB P0.7, CTWO
+                     181                     
+00BE 117D            182                     ACALL PFIVE
+00C0 800A            183                     SJMP ENDTIME
+00C2 1180            184     CONE:   ACALL ONE
+00C4 8006            185                     SJMP ENDTIME
+00C6 1183            186     CONEFI: ACALL ONEFI
+00C8 8002            187                     SJMP ENDTIME
+00CA 1186            188     CTWO:   ACALL TWO
+00CC 22              189     ENDTIME: RET
+                     190                     
+A51 MACRO ASSEMBLER  PROJEFT1                                                             10/17/2014 10:12:48 PAGE     4
+
+                     191     END
+                                     
+                             ;JB 2
+                             ;LCALL 1
+                             ;SJMP TOP
+                             ;LABEL 2 CALL 2
+                             ;SJMP TOP
+A51 MACRO ASSEMBLER  PROJEFT1                                                             10/17/2014 10:12:48 PAGE     5
 
 SYMBOL TABLE LISTING
 ------ ----- -------
@@ -145,46 +218,43 @@ SYMBOL TABLE LISTING
 
 N A M E             T Y P E  V A L U E   ATTRIBUTES
 
-AGAIN. . . . . . .  C ADDR   002FH   A   
-BOUN . . . . . . .  C ADDR   0084H   A   
-COUN . . . . . . .  C ADDR   0089H   A   
-CYC. . . . . . . .  C ADDR   008EH   A   
-DBLBOUN. . . . . .  C ADDR   0093H   A   
-DELAYCH. . . . . .  C ADDR   009EH   A   
-DLY10. . . . . . .  C ADDR   0053H   A   
-DLY11. . . . . . .  C ADDR   0055H   A   
-DLY12. . . . . . .  C ADDR   0057H   A   
-DLY150 . . . . . .  C ADDR   0060H   A   
-DLY151 . . . . . .  C ADDR   0062H   A   
-DLY152 . . . . . .  C ADDR   0064H   A   
-DLY20. . . . . . .  C ADDR   006DH   A   
-DLY21. . . . . . .  C ADDR   006FH   A   
-DLY22. . . . . . .  C ADDR   0071H   A   
-DLY50. . . . . . .  C ADDR   0046H   A   
-DLY51. . . . . . .  C ADDR   0048H   A   
-DLY52. . . . . . .  C ADDR   004AH   A   
-FULL . . . . . . .  C ADDR   00AFH   A   
-FULLHAF. . . . . .  C ADDR   00B4H   A   
+AGAIN. . . . . . .  C ADDR   003CH   A   
+BOT. . . . . . . .  C ADDR   00B4H   A   
+BOUN . . . . . . .  C ADDR   00A4H   A   
+BSKIP. . . . . . .  C ADDR   002EH   A   
+CHDELAY. . . . . .  C ADDR   00B5H   A   
+CHOOSE . . . . . .  C ADDR   0094H   A   
+CONE . . . . . . .  C ADDR   00C2H   A   
+CONEFI . . . . . .  C ADDR   00C6H   A   
+COUN . . . . . . .  C ADDR   00A8H   A   
+CSKIP. . . . . . .  C ADDR   0041H   A   
+CTWO . . . . . . .  C ADDR   00CAH   A   
+CYC. . . . . . . .  C ADDR   00B0H   A   
+CYSKIP . . . . . .  C ADDR   005AH   A   
+DBL. . . . . . . .  C ADDR   00ACH   A   
+DELAY. . . . . . .  C ADDR   0089H   A   
+DLY20. . . . . . .  C ADDR   0089H   A   
+DLY21. . . . . . .  C ADDR   008BH   A   
+DLY22. . . . . . .  C ADDR   008DH   A   
+ENDTIME. . . . . .  C ADDR   00CCH   A   
 LOOP . . . . . . .  C ADDR   0010H   A   
 MAIN . . . . . . .  C ADDR   0000H   A   
-MLEFT. . . . . . .  C ADDR   001BH   A   
-MODE1. . . . . . .  C ADDR   0015H   A   
-MODE2. . . . . . .  C ADDR   002CH   A   
-MODE3. . . . . . .  C ADDR   0038H   A   
-MODE4. . . . . . .  C ADDR   003CH   A   
-MODECH . . . . . .  C ADDR   0078H   A   
-OFF. . . . . . . .  C ADDR   0040H   A   
-ONE. . . . . . . .  C ADDR   0051H   A   
-ONEFI. . . . . . .  C ADDR   005EH   A   
+MLEFT. . . . . . .  C ADDR   001AH   A   
+MODE1. . . . . . .  C ADDR   0014H   A   
+MODE2. . . . . . .  C ADDR   0039H   A   
+MODE3. . . . . . .  C ADDR   004CH   A   
+MODE4. . . . . . .  C ADDR   0051H   A   
+NEXT . . . . . . .  C ADDR   0055H   A   
+OFF. . . . . . . .  C ADDR   0069H   A   
+ONE. . . . . . . .  C ADDR   0080H   A   
+ONEFI. . . . . . .  C ADDR   0083H   A   
 P0 . . . . . . . .  D ADDR   0080H   A   
 P1 . . . . . . . .  D ADDR   0090H   A   
-PFIVE. . . . . . .  C ADDR   0044H   A   
-POINT. . . . . . .  C ADDR   00AAH   A   
-RESET. . . . . . .  C ADDR   0078H   A   
-RIGHT. . . . . . .  C ADDR   0023H   A   
-TIME . . . . . . .  C ADDR   009EH   A   
-TWO. . . . . . . .  C ADDR   006BH   A   
-TWOFULL. . . . . .  C ADDR   00B9H   A   
+PFIVE. . . . . . .  C ADDR   007DH   A   
+RIGHT. . . . . . .  C ADDR   0029H   A   
+SKIP . . . . . . .  C ADDR   001FH   A   
+TOP. . . . . . . .  C ADDR   006CH   A   
+TWO. . . . . . . .  C ADDR   0086H   A   
 
 
 REGISTER BANK(S) USED: 0 
