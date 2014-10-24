@@ -1,8 +1,8 @@
-BL51 BANKED LINKER/LOCATER V6.22                                                        10/23/2014  20:45:36  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22                                                        10/24/2014  09:06:09  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
-G:\KEIL_V5\C51\BIN\BL51.EXE Projeft1.obj TO Project1 RAMSIZE (256)
+C:\KEIL_V5\C51\BIN\BL51.EXE Projeft1.obj TO Project1 RAMSIZE (256)
 
 
 INPUT MODULES INCLUDED:
@@ -19,7 +19,7 @@ LINK MAP OF MODULE:  Project1 (PROJEFT1)
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
-            CODE    0000H     0119H     ABSOLUTE     
+            CODE    0000H     0117H     ABSOLUTE     
 
 
 
@@ -30,36 +30,36 @@ SYMBOL TABLE OF MODULE:  Project1 (PROJEFT1)
 
   -------         MODULE        PROJEFT1
   C:003AH         SYMBOL        AGAIN
-  C:00FEH         SYMBOL        BOT
-  C:00EEH         SYMBOL        BOUN
+  C:00FCH         SYMBOL        BOT
+  C:00ECH         SYMBOL        BOUN
   C:002DH         SYMBOL        BSKIP
   C:0040H         SYMBOL        CFORCE
-  C:00FFH         SYMBOL        CHDELAY
-  C:00DEH         SYMBOL        CHOOSE
-  C:010EH         SYMBOL        CONE
-  C:0112H         SYMBOL        CONEFI
-  C:00F2H         SYMBOL        COUN
-  C:010CH         SYMBOL        CPFI
+  C:00FDH         SYMBOL        CHDELAY
+  C:00DCH         SYMBOL        CHOOSE
+  C:010CH         SYMBOL        CONE
+  C:0110H         SYMBOL        CONEFI
+  C:00F0H         SYMBOL        COUN
+  C:010AH         SYMBOL        CPFI
   C:0042H         SYMBOL        CSKIP
-  C:0116H         SYMBOL        CTWO
-  C:00FAH         SYMBOL        CYC
+  C:0114H         SYMBOL        CTWO
+  C:00F8H         SYMBOL        CYC
   C:00A2H         SYMBOL        CYSKIP
-  C:00F6H         SYMBOL        DBL
+  C:00F4H         SYMBOL        DBL
   C:0052H         SYMBOL        DBLIN
   C:006FH         SYMBOL        DBLOUT
   C:005BH         SYMBOL        DDFORCE
   C:007AH         SYMBOL        DDSKIP
-  C:00D3H         SYMBOL        DELAY
+  C:00D1H         SYMBOL        DELAY
   C:0078H         SYMBOL        DFORCE
-  C:00D3H         SYMBOL        DLY20
-  C:00D5H         SYMBOL        DLY21
-  C:00D7H         SYMBOL        DLY22
+  C:00D1H         SYMBOL        DLY20
+  C:00D3H         SYMBOL        DLY21
+  C:00D5H         SYMBOL        DLY22
   C:005DH         SYMBOL        DSKIP
-  C:0118H         SYMBOL        ENDTIME
+  C:0116H         SYMBOL        ENDTIME
   C:00A0H         SYMBOL        FORCE
   C:0010H         SYMBOL        LOOP
   C:0000H         SYMBOL        MAIN
-BL51 BANKED LINKER/LOCATER V6.22                                                      10/23/2014  20:45:36  PAGE 2
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/24/2014  09:06:09  PAGE 2
 
 
   C:001AH         SYMBOL        MLEFT
@@ -69,15 +69,15 @@ SYMBOL TABLE OF MODULE:  Project1 (PROJEFT1)
   C:008BH         SYMBOL        MODE4
   C:0094H         SYMBOL        NEXT
   C:00ADH         SYMBOL        OFF
-  C:00C6H         SYMBOL        ON
-  C:00CAH         SYMBOL        ONE
-  C:00CDH         SYMBOL        ONEFI
+  C:00C4H         SYMBOL        ON
+  C:00C8H         SYMBOL        ONE
+  C:00CBH         SYMBOL        ONEFI
   D:0080H         SYMBOL        P0
   D:0090H         SYMBOL        P1
-  C:00C7H         SYMBOL        PFIVE
+  C:00C5H         SYMBOL        PFIVE
   C:0028H         SYMBOL        RIGHT
   C:001FH         SYMBOL        SKIP
-  C:00D0H         SYMBOL        TWO
+  C:00CEH         SYMBOL        TWO
   C:0000H         LINE#         3
   C:0002H         LINE#         4
   C:0004H         LINE#         5
@@ -119,7 +119,7 @@ SYMBOL TABLE OF MODULE:  Project1 (PROJEFT1)
   C:004BH         LINE#         53
   C:004CH         LINE#         56
   C:004EH         LINE#         57
-BL51 BANKED LINKER/LOCATER V6.22                                                      10/23/2014  20:45:36  PAGE 3
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/24/2014  09:06:09  PAGE 3
 
 
   C:0050H         LINE#         58
@@ -179,7 +179,7 @@ SYMBOL TABLE OF MODULE:  Project1 (PROJEFT1)
   C:00B3H         LINE#         125
   C:00B6H         LINE#         126
   C:00B9H         LINE#         129
-BL51 BANKED LINKER/LOCATER V6.22                                                      10/23/2014  20:45:36  PAGE 4
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/24/2014  09:06:09  PAGE 4
 
 
   C:00BBH         LINE#         130
@@ -187,54 +187,53 @@ SYMBOL TABLE OF MODULE:  Project1 (PROJEFT1)
   C:00BFH         LINE#         132
   C:00C1H         LINE#         133
   C:00C2H         LINE#         134
-  C:00C4H         LINE#         135
-  C:00C6H         LINE#         137
-  C:00C7H         LINE#         140
-  C:00C9H         LINE#         141
-  C:00CAH         LINE#         144
-  C:00CCH         LINE#         145
-  C:00CDH         LINE#         148
-  C:00CFH         LINE#         149
-  C:00D0H         LINE#         152
-  C:00D2H         LINE#         153
-  C:00D3H         LINE#         156
-  C:00D5H         LINE#         157
-  C:00D7H         LINE#         158
-  C:00D9H         LINE#         159
-  C:00DBH         LINE#         160
-  C:00DDH         LINE#         161
-  C:00DEH         LINE#         164
-  C:00E1H         LINE#         165
-  C:00E4H         LINE#         166
-  C:00E7H         LINE#         167
-  C:00EAH         LINE#         169
-  C:00ECH         LINE#         170
-  C:00EEH         LINE#         171
-  C:00F0H         LINE#         172
-  C:00F2H         LINE#         173
-  C:00F4H         LINE#         174
-  C:00F6H         LINE#         175
-  C:00F8H         LINE#         176
-  C:00FAH         LINE#         177
-  C:00FCH         LINE#         178
-  C:00FEH         LINE#         179
-  C:00FFH         LINE#         182
-  C:0102H         LINE#         183
-  C:0105H         LINE#         184
-  C:0108H         LINE#         186
-  C:010AH         LINE#         187
-  C:010CH         LINE#         188
-  C:010EH         LINE#         189
-  C:0110H         LINE#         190
-  C:0112H         LINE#         191
-  C:0114H         LINE#         192
-  C:0116H         LINE#         193
-  C:0118H         LINE#         194
+  C:00C4H         LINE#         137
+  C:00C5H         LINE#         140
+  C:00C7H         LINE#         141
+  C:00C8H         LINE#         144
+  C:00CAH         LINE#         145
+  C:00CBH         LINE#         148
+  C:00CDH         LINE#         149
+  C:00CEH         LINE#         152
+  C:00D0H         LINE#         153
+  C:00D1H         LINE#         156
+  C:00D3H         LINE#         157
+  C:00D5H         LINE#         158
+  C:00D7H         LINE#         159
+  C:00D9H         LINE#         160
+  C:00DBH         LINE#         161
+  C:00DCH         LINE#         164
+  C:00DFH         LINE#         165
+  C:00E2H         LINE#         166
+  C:00E5H         LINE#         167
+  C:00E8H         LINE#         169
+  C:00EAH         LINE#         170
+  C:00ECH         LINE#         171
+  C:00EEH         LINE#         172
+  C:00F0H         LINE#         173
+  C:00F2H         LINE#         174
+  C:00F4H         LINE#         175
+  C:00F6H         LINE#         176
+  C:00F8H         LINE#         177
+  C:00FAH         LINE#         178
+  C:00FCH         LINE#         179
+  C:00FDH         LINE#         182
+  C:0100H         LINE#         183
+  C:0103H         LINE#         184
+  C:0106H         LINE#         186
+  C:0108H         LINE#         187
+  C:010AH         LINE#         188
+  C:010CH         LINE#         189
+  C:010EH         LINE#         190
+  C:0110H         LINE#         191
+  C:0112H         LINE#         192
+  C:0114H         LINE#         193
+  C:0116H         LINE#         194
   -------         ENDMOD        PROJEFT1
 
 ******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0119H BYTE (13%) *
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0117H BYTE (13%) *
 ******************************************************************************
 
-Program Size: data=8.0 xdata=0 code=281
+Program Size: data=8.0 xdata=0 code=279
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

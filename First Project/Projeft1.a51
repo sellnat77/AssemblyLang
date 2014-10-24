@@ -132,7 +132,7 @@ OFF:	;Flashing lights
 		ACALL DELAY
 		CLR A
 		MOV P1,A
-		SJMP OFF
+		;SJMP OFF
 ON:		
 		RET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;		
