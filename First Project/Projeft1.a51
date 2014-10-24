@@ -55,7 +55,7 @@ CSKIP:
 MODE3:	;Double bouncing
 		MOV R0,#128
 		MOV R1,#001
-		MOV R2,#004
+		MOV R2,#003
 DBLIN:	
 		JB P0.1,DDFORCE
 		JB P0.0,DDFORCE
@@ -125,12 +125,14 @@ OFF:	;Flashing lights
 		JB P0.2, ON
 		JB P0.3, ON
 
-		ACALL CHDELAY
+		
 		MOV A,#0FFH
 		MOV P1,A
+		ACALL CHDELAY
 		ACALL DELAY
 		CLR A
 		MOV P1,A
+		SJMP OFF
 ON:		
 		RET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;		
