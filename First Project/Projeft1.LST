@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  PROJEFT1                                                             10/23/2014 20:02:23 PAGE     1
+A51 MACRO ASSEMBLER  PROJEFT1                                                             10/23/2014 20:45:36 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.02b
@@ -65,7 +65,7 @@ LOC  OBJ            LINE     SOURCE
 004C 7880             56                     MOV R0,#128
 004E 7901             57                     MOV R1,#001
 0050 7A03             58                     MOV R2,#003
-A51 MACRO ASSEMBLER  PROJEFT1                                                             10/23/2014 20:02:23 PAGE     2
+A51 MACRO ASSEMBLER  PROJEFT1                                                             10/23/2014 20:45:36 PAGE     2
 
 0052                  59     DBLIN:  
 0052 208106           60                     JB P0.1,DDFORCE
@@ -133,7 +133,7 @@ LOC  OBJ            LINE     SOURCE
 00AD                 122     OFF:    ;Flashing lights
 00AD 208016          123                     JB P0.0, ON
 00B0 208113          124                     JB P0.1, ON
-A51 MACRO ASSEMBLER  PROJEFT1                                                             10/23/2014 20:02:23 PAGE     3
+A51 MACRO ASSEMBLER  PROJEFT1                                                             10/23/2014 20:45:36 PAGE     3
 
 00B3 208210          125                     JB P0.2, ON
 00B6 20830D          126                     JB P0.3, ON
@@ -201,14 +201,14 @@ LOC  OBJ            LINE     SOURCE
 010C 11C7            188     CPFI:   ACALL PFIVE
 010E 11CA            189     CONE:   ACALL ONE
 0110 8006            190                     SJMP ENDTIME
-A51 MACRO ASSEMBLER  PROJEFT1                                                             10/23/2014 20:02:23 PAGE     4
+A51 MACRO ASSEMBLER  PROJEFT1                                                             10/23/2014 20:45:36 PAGE     4
 
 0112 11CD            191     CONEFI: ACALL ONEFI
 0114 8002            192                     SJMP ENDTIME
 0116 11D0            193     CTWO:   ACALL TWO
 0118 22              194     ENDTIME: RET
                      195     END
-A51 MACRO ASSEMBLER  PROJEFT1                                                             10/23/2014 20:02:23 PAGE     5
+A51 MACRO ASSEMBLER  PROJEFT1                                                             10/23/2014 20:45:36 PAGE     5
 
 SYMBOL TABLE LISTING
 ------ ----- -------
