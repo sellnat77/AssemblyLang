@@ -1,12 +1,19 @@
+		m_flag BIT 0
+		
 		ORG 0000H
+		LJMP SETUP
+		
 		ORG 0003H
 		SETB m_flag
 		RETI			
 		
-MAIN:
-		m_flag BIT 0
+SETUP:
+		MOV IE, #85H
+		
 		SETB EA
 		SETB EX0
+		MOV TMOD, #01H
+		
 		
 		SETB P0.0
 		SETB P0.1
@@ -16,9 +23,10 @@ MAIN:
 		SETB P0.5
 		SETB P0.6
 		SETB P0.7
+		SETB P3.7
 		
 LOOP:
-
+		CLR m_flag
 		JB P0.0, BOUN
 		JB P0.1, COUN
 		JB P0.2, DBL
@@ -48,7 +56,7 @@ MLEFT:	JB m_flag,HOME1
 		ACALL DELAY
 		
 		DJNZ R0,MLEFT
-RIGHT:	
+RIGHT:	JB m_flag,HOME1
 		MOV P1, A ;Rotate right 7 times
 		RR A
 		ACALL CHDELAY
@@ -59,13 +67,13 @@ HOME1:
 		RET		
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;		
 MODE2:	;Counting
-		CLR A
-		MOV R4,#0FFH
-AGAIN:	
-		JB P0.0,HOME2
-		JNB P0.1,HOME2
-
-
+		MOV R4,P2
+SKIPU:		
+		JNB P3.7,SKIPD
+		;UP
+		MOV A,R4
+AGAIN:	JB m_flag,HOME2
+		
 		INC A
 		MOV P1,A
 		
@@ -73,7 +81,22 @@ AGAIN:
 		ACALL DELAY
 
 		DJNZ R4,AGAIN
-		SJMP MODE2
+		MOV R4,#0H
+		SJMP SKIPU
+		;DOWN	
+SKIPD:		
+		
+		MOV A,R4
+OTRA:	JB m_flag,HOME2
+		
+		DEC A
+		MOV P1,A
+		ACALL CHDELAY
+		ACALL DELAY		
+		DJNZ R4,OTRA
+		MOV R4,#0FFH
+		SJMP SKIPD
+		
 HOME2:		
 		RET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;		
@@ -82,9 +105,7 @@ MODE3:	;Double bouncing
 		MOV R1,#001
 		MOV R2,#004
 DBLIN:	
-		JB P0.1,HOME
-		JB P0.0,HOME
-		JNB P0.2,HOME
+		JB m_flag,HOME
 
 		MOV A,R0
 		ORL A,R1
@@ -102,9 +123,7 @@ DBLIN:
 		MOV R2,#002
 DBLOUT: 
 		
-		JB P0.1,HOME
-		JB P0.0,HOME
-		JNB P0.2,HOME
+		JB m_flag,HOME
 
 		MOV A,R0
 		RR A
@@ -132,10 +151,7 @@ MODE4:	;Cyclic
 		MOV R4,#08H
 		
 NEXT:	
-		JB P0.2,HOME4
-		JB P0.1,HOME4
-		JB P0.0,HOME4
-		JNB P0.3,HOME4
+		JB m_flag,HOME4
 
 		MOV P1,A
 		RR A
@@ -148,10 +164,7 @@ HOME4:
 		RET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;		
 OFF:	;Flashing lights
-		JB P0.0, ON
-		JB P0.1, ON
-		JB P0.2, ON
-		JB P0.3, ON
+		JB m_flag, ON
 
 		
 		MOV A,#0FFH
@@ -166,27 +179,38 @@ ON:
 		RET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;		
 PFIVE: 	;.5 sec delay
-		MOV R7, #07H ;Delay function
+		MOV R7, #7H ;Delay function
 		RET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;		
 ONE:	;1 dec delay
-		MOV R7, #0EH ;Delay function
+		MOV R7, #2H ;Delay function
 		RET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;		
 ONEFI:	;1.5 sec delay
-		MOV R7, #015H ;Delay function
+		MOV R7, #3H ;Delay function
 		RET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;		
 TWO:	;2 sec delay
-		MOV R7, #01CH ;Delay function
+		MOV R7, #4H ;Delay function
 		RET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 DELAY:
-DLY20:	MOV R6, #0FFH
-DLY21: 	MOV R5, #0FFH
-DLY22: 	DJNZ R5, DLY22
-		DJNZ R6, DLY21
-		DJNZ R7, DLY20
+		
+	  
+; Calculate the initial counting value x:
+; In At89C51RD2 1 machine cycle equals 12 crystal cycles:
+; (12/11.0592MHz)(2^16-x)=50ms
+; solve the equation for x, we obtain:
+; x=2^16-50ms*11.0592MHz/12=19456=4C00H
+
+WAIT: MOV TL0, #0;load initial counting value
+      MOV TH0, #4CH;
+      SETB TR0;turn on T0
+HERE: JNB TF0, HERE;wait for timer 0 to overflow
+      CLR TR0 ;turn off timer 0
+      CLR TF0 ;clear TF0 as interrupt is not used, 
+        ;it will not be cleared by hardware.
+      DJNZ R7, WAIT
 		RET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	
@@ -199,6 +223,7 @@ CHDELAY:
 		ACALL TWO
 		SJMP ENDTIME
 CPFI:	ACALL PFIVE
+		SJMP ENDTIME
 CONE:	ACALL ONE
 		SJMP ENDTIME
 CONEFI: ACALL ONEFI
