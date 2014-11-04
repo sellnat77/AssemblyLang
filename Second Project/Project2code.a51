@@ -74,11 +74,12 @@ SKIPU:
 		MOV A,R4
 AGAIN:	JB m_flag,HOME2
 		
-		INC A
+		
 		MOV P1,A
 		
 		ACALL CHDELAY
 		ACALL DELAY
+		INC A
 
 		DJNZ R4,AGAIN
 		MOV R4,#0H
@@ -89,10 +90,11 @@ SKIPD:
 		MOV A,R4
 OTRA:	JB m_flag,HOME2
 		
-		DEC A
+		
 		MOV P1,A
 		ACALL CHDELAY
-		ACALL DELAY		
+		ACALL DELAY
+		DEC A		
 		DJNZ R4,OTRA
 		MOV R4,#0FFH
 		SJMP SKIPD
@@ -171,10 +173,11 @@ OFF:	;Flashing lights
 		MOV P1,A
 		ACALL CHDELAY
 		ACALL DELAY
-		CLR A
-		MOV P1,A
+		;CLR A
+		MOV P1,#0H
 		ACALL CHDELAY
 		ACALL DELAY
+		SJMP OFF
 ON:		
 		RET
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;		
