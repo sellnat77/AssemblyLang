@@ -130,7 +130,7 @@
             <RestoreMemoryDisplay>1</RestoreMemoryDisplay>
             <RestoreFunctions>1</RestoreFunctions>
             <RestoreToolbox>1</RestoreToolbox>
-            <LimitSpeedToRealTime>0</LimitSpeedToRealTime>
+            <LimitSpeedToRealTime>1</LimitSpeedToRealTime>
             <RestoreSysVw>1</RestoreSysVw>
           </Simulator>
           <Target>
@@ -229,7 +229,7 @@
               <RCB>
                 <Type>0</Type>
                 <StartAddress>0x0</StartAddress>
-                <Size>0x0</Size>
+                <Size>0x10000</Size>
               </RCB>
               <RXB>
                 <Type>0</Type>
@@ -361,6 +361,13 @@
       <Groups>
         <Group>
           <GroupName>Source Group 1</GroupName>
+          <Files>
+            <File>
+              <FileName>Project2code.a51</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\Project2code.a51</FilePath>
+            </File>
+          </Files>
         </Group>
       </Groups>
     </Target>
