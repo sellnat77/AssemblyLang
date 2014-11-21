@@ -1,0 +1,28 @@
+		ORG 0000H
+		LJMP MAIN
+MAIN:
+		MOV R5, #89H ;89F99AH
+		MOV R6, #0F9H
+		MOV R7, #9AH
+		
+		MOV R2,#34H ;34BC48H
+		MOV R3,#0BCH
+		MOV R4,#48H
+		
+		MOV A,R7
+		ADD A,R4
+		MOV 42H,A
+		
+		MOV A,R6
+		ADDC A,R3
+		MOV 41H,A
+		
+		MOV A,R5
+		ADDC A,R2
+		MOV 40H,A
+		
+		SJMP MAIN
+		
+		
+		
+		END
