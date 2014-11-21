@@ -1,7 +1,13 @@
 		ORG 0000H
 		LJMP MAIN
 MAIN:
-		MOV R5, #89H ;89F99AH
+		ACALL ADDIN
+		ACALL SUBBIN
+		ACALL BCD
+		
+		SJMP MAIN
+		
+ADDIN:  MOV R5, #89H ;89F99AH
 		MOV R6, #0F9H
 		MOV R7, #9AH
 		
@@ -20,9 +26,56 @@ MAIN:
 		MOV A,R5
 		ADDC A,R2
 		MOV 40H,A
+		RET	
+
+SUBBIN: 
+		MOV R5,#34H ;344548H
+		MOV R6,#45H
+		MOV R7,#48H
 		
-		SJMP MAIN
+		MOV R2,#19H ;197F9A
+		MOV R3,#7FH
+		MOV R4,#9AH
 		
+		MOV A,R7
+		CLR C
+		SUBB A,R4
+		MOV 47H,A
+		
+		MOV A,R6
+		SUBB A,R3
+		MOV 46H,A
+		
+		MOV A,R5
+		SUBB A,R2
+		MOV 45H,A
+		RET
+		
+BCD:	
+		MOV R5,#19H
+		MOV R6,#77H
+		MOV R7,#95H
+		
+		MOV R2,#34H
+		MOV R3,#45H
+		MOV R4,#48H
+		
+		MOV A,R7
+		ADD A,R4
+		DA A
+		MOV A,53H
+		
+		MOV A,R6
+		ADDC A,R3
+		DA A
+		MOV 52H,A
+		
+		MOV A,R5
+		ADDC A,R2
+		DA A 
+		MOV 50H,A
+		
+		RET
 		
 		
 		END
