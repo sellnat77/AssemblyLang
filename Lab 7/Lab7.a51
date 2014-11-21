@@ -3,8 +3,7 @@
 MAIN:
 		ACALL ADDIN
 		ACALL SUBBIN
-		ACALL BCD
-		
+		ACALL BCD		
 		SJMP MAIN
 		
 ADDIN:  MOV R5, #89H ;89F99AH
@@ -16,7 +15,7 @@ ADDIN:  MOV R5, #89H ;89F99AH
 		MOV R4,#48H
 		
 		MOV A,R7
-		ADD A,R4
+		ADDC A,R4
 		MOV 42H,A
 		
 		MOV A,R6
@@ -52,30 +51,28 @@ SUBBIN:
 		RET
 		
 BCD:	
-		MOV R5,#19H
+		MOV R5,#19H ;197795H
 		MOV R6,#77H
 		MOV R7,#95H
 		
-		MOV R2,#34H
+		MOV R2,#34H ;344548H
 		MOV R3,#45H
-		MOV R4,#48H
+		MOV R4,#48H		
 		
 		MOV A,R7
 		ADD A,R4
-		DA A
-		MOV A,53H
+		DA A		
+		MOV 52H,A
 		
 		MOV A,R6
 		ADDC A,R3
 		DA A
-		MOV 52H,A
+		MOV 51H,A
 		
 		MOV A,R5
 		ADDC A,R2
-		DA A 
-		MOV 50H,A
-		
-		RET
-		
+		DA A
+		MOV 50H,A		
+		RET		
 		
 		END
