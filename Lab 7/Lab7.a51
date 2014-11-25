@@ -15,7 +15,7 @@ ADDIN:  MOV R5, #89H ;89F99AH
 		MOV R4,#48H
 		
 		MOV A,R7
-		ADDC A,R4
+		ADD A,R4
 		MOV 42H,A
 		
 		MOV A,R6
