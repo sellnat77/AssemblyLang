@@ -45,7 +45,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\</OutputDirectory>
-          <OutputName>Final-Project</OutputName>
+          <OutputName>Lab 7</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
@@ -361,6 +361,13 @@
       <Groups>
         <Group>
           <GroupName>Source Group 1</GroupName>
+          <Files>
+            <File>
+              <FileName>Lab7.a51</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\Lab7.a51</FilePath>
+            </File>
+          </Files>
         </Group>
       </Groups>
     </Target>

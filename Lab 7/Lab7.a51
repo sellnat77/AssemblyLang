@@ -1,0 +1,78 @@
+		ORG 0000H
+		LJMP MAIN
+MAIN:
+		ACALL ADDIN
+		ACALL SUBBIN
+		ACALL BCD		
+		SJMP MAIN
+		
+ADDIN:  MOV R5, #89H ;89F99AH
+		MOV R6, #0F9H
+		MOV R7, #9AH
+		
+		MOV R2,#34H ;34BC48H
+		MOV R3,#0BCH
+		MOV R4,#48H
+		
+		MOV A,R7
+		ADD A,R4
+		MOV 42H,A
+		
+		MOV A,R6
+		ADDC A,R3
+		MOV 41H,A
+		
+		MOV A,R5
+		ADDC A,R2
+		MOV 40H,A
+		RET	
+
+SUBBIN: 
+		MOV R5,#34H ;344548H
+		MOV R6,#45H
+		MOV R7,#48H
+		
+		MOV R2,#19H ;197F9A
+		MOV R3,#7FH
+		MOV R4,#9AH
+		
+		MOV A,R7
+		CLR C
+		SUBB A,R4
+		MOV 47H,A
+		
+		MOV A,R6
+		SUBB A,R3
+		MOV 46H,A
+		
+		MOV A,R5
+		SUBB A,R2
+		MOV 45H,A
+		RET
+		
+BCD:	
+		MOV R5,#19H ;197795H
+		MOV R6,#77H
+		MOV R7,#95H
+		
+		MOV R2,#34H ;344548H
+		MOV R3,#45H
+		MOV R4,#48H		
+		
+		MOV A,R7
+		ADD A,R4
+		DA A		
+		MOV 52H,A
+		
+		MOV A,R6
+		ADDC A,R3
+		DA A
+		MOV 51H,A
+		
+		MOV A,R5
+		ADDC A,R2
+		DA A
+		MOV 50H,A		
+		RET		
+		
+		END

@@ -1,0 +1,25 @@
+		ORG 0000H
+		LJMP MAIN
+MAIN:	
+		MOV R0,#40H
+		MOV R2,#0AH
+		MOV R4,#00H
+		MOV R5,#00H
+		
+LOOP:
+		MOV @R0,P0	
+		ADD A,@R0
+		MOV R4,A
+		JNC SKIP
+		INC R5
+SKIP:		
+		INC R0		
+		DJNZ R2,LOOP
+		MOV 4AH,R5
+		MOV 4BH,R4
+		SJMP MAIN
+		
+		
+		
+
+		END
