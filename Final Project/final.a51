@@ -1,0 +1,5 @@
+ORG 0000H
+	
+	MAIN:
+	SJMP MAIN
+	END
