@@ -31,6 +31,7 @@ AGAIN:
 		
 		INC A
 		INC R0
+		;;want to push onto new branch
 		
 		
 		DJNZ R7,AGAIN
