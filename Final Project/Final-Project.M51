@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22                                                        12/05/2014  09:31:02  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22                                                        12/05/2014  10:26:44  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
@@ -19,7 +19,7 @@ LINK MAP OF MODULE:  Final-Project (FINAL)
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
-            CODE    0000H     007CH     ABSOLUTE     
+            CODE    0000H     0091H     ABSOLUTE     
 
 
 
@@ -29,102 +29,117 @@ SYMBOL TABLE OF MODULE:  Final-Project (FINAL)
   ----------------------------------
 
   -------         MODULE        FINAL
-  C:0025H         SYMBOL        AGAIN
-  C:0036H         SYMBOL        AVERAGE
+  C:0023H         SYMBOL        AGAIN
+  C:0032H         SYMBOL        AVERAGE
   D:00F0H         SYMBOL        B
-  C:0003H         SYMBOL        DATAB
-  C:0049H         SYMBOL        LARGE
-  C:005BH         SYMBOL        LAST
-  C:0051H         SYMBOL        LOO
-  C:0012H         SYMBOL        LOOP
-  C:000BH         SYMBOL        MAIN
-  C:0055H         SYMBOL        NEXT
-  C:0021H         SYMBOL        PACK
-  C:003BH         SYMBOL        REP
-  C:0059H         SYMBOL        SKI
-  C:0074H         SYMBOL        SLAST
-  C:006AH         SYMBOL        SLOO
-  C:0063H         SYMBOL        SMALL
-  C:006EH         SYMBOL        SNEXT
-  C:0072H         SYMBOL        SSKI
+  C:0089H         SYMBOL        DATAB
+  C:0080H         SYMBOL        HLOOP
+  C:0078H         SYMBOL        HTOAS
+  C:0045H         SYMBOL        LARGE
+  C:0057H         SYMBOL        LAST
+  C:004DH         SYMBOL        LOO
+  C:000AH         SYMBOL        LOOP
+  C:0003H         SYMBOL        MAIN
+  C:0051H         SYMBOL        NEXT
+  C:001DH         SYMBOL        PACK
+  C:0037H         SYMBOL        REP
+  C:0055H         SYMBOL        SKI
+  C:0070H         SYMBOL        SLAST
+  C:0066H         SYMBOL        SLOO
+  C:005FH         SYMBOL        SMALL
+  C:006AH         SYMBOL        SNEXT
+  C:006EH         SYMBOL        SSKI
   C:0000H         LINE#         2
-  C:000BH         LINE#         7
-  C:000EH         LINE#         8
-  C:0010H         LINE#         9
-  C:0012H         LINE#         13
-  C:0013H         LINE#         14
-  C:0014H         LINE#         15
-  C:0015H         LINE#         16
-  C:0016H         LINE#         17
-  C:0017H         LINE#         18
-  C:0019H         LINE#         20
-  C:001BH         LINE#         21
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/05/2014  09:31:02  PAGE 2
+  C:0003H         LINE#         7
+  C:0006H         LINE#         8
+  C:0008H         LINE#         9
+  C:000AH         LINE#         13
+  C:000BH         LINE#         14
+  C:000CH         LINE#         15
+  C:000DH         LINE#         16
+  C:000EH         LINE#         17
+  C:000FH         LINE#         18
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/05/2014  10:26:44  PAGE 2
 
 
-  C:001DH         LINE#         22
-  C:001FH         LINE#         23
-  C:0021H         LINE#         26
-  C:0023H         LINE#         27
-  C:0025H         LINE#         29
-  C:0026H         LINE#         30
-  C:0029H         LINE#         31
-  C:002AH         LINE#         32
-  C:002BH         LINE#         33
-  C:002DH         LINE#         34
-  C:002EH         LINE#         35
-  C:0030H         LINE#         36
-  C:0031H         LINE#         38
-  C:0032H         LINE#         39
-  C:0033H         LINE#         41
-  C:0035H         LINE#         42
-  C:0036H         LINE#         44
-  C:0038H         LINE#         45
-  C:003AH         LINE#         46
-  C:003BH         LINE#         49
-  C:003DH         LINE#         50
-  C:003FH         LINE#         52
-  C:0040H         LINE#         53
-  C:0042H         LINE#         55
-  C:0045H         LINE#         56
-  C:0046H         LINE#         59
-  C:0048H         LINE#         62
-  C:0049H         LINE#         65
-  C:004BH         LINE#         66
-  C:004DH         LINE#         67
-  C:0050H         LINE#         68
-  C:0051H         LINE#         72
-  C:0052H         LINE#         73
-  C:0055H         LINE#         75
-  C:0057H         LINE#         76
-  C:0059H         LINE#         78
-  C:005BH         LINE#         80
-  C:005CH         LINE#         81
-  C:005EH         LINE#         82
-  C:0060H         LINE#         83
-  C:0062H         LINE#         84
-  C:0063H         LINE#         87
-  C:0065H         LINE#         88
-  C:0067H         LINE#         89
-  C:0069H         LINE#         90
-  C:006AH         LINE#         94
-  C:006BH         LINE#         95
-  C:006EH         LINE#         97
-  C:0070H         LINE#         98
-  C:0072H         LINE#         100
-  C:0074H         LINE#         102
-  C:0075H         LINE#         103
-  C:0077H         LINE#         104
-  C:0079H         LINE#         105
-  C:007BH         LINE#         106
+  C:0011H         LINE#         19
+  C:0013H         LINE#         20
+  C:0015H         LINE#         21
+  C:0017H         LINE#         22
+  C:0019H         LINE#         23
+  C:001BH         LINE#         24
+  C:001DH         LINE#         28
+  C:001FH         LINE#         29
+  C:0021H         LINE#         30
+  C:0023H         LINE#         32
+  C:0024H         LINE#         33
+  C:0027H         LINE#         34
+  C:0028H         LINE#         35
+  C:0029H         LINE#         36
+  C:002AH         LINE#         37
+  C:002CH         LINE#         44
+  C:002DH         LINE#         45
+  C:002EH         LINE#         46
+  C:002FH         LINE#         48
+  C:0031H         LINE#         49
+  C:0032H         LINE#         51
+  C:0034H         LINE#         52
+  C:0036H         LINE#         53
+  C:0037H         LINE#         56
+  C:0039H         LINE#         57
+  C:003BH         LINE#         59
+  C:003CH         LINE#         60
+  C:003EH         LINE#         62
+  C:0041H         LINE#         63
+  C:0042H         LINE#         66
+  C:0044H         LINE#         69
+  C:0045H         LINE#         73
+  C:0047H         LINE#         74
+  C:0049H         LINE#         75
+  C:004CH         LINE#         76
+  C:004DH         LINE#         80
+  C:004EH         LINE#         81
+  C:0051H         LINE#         83
+  C:0053H         LINE#         84
+  C:0055H         LINE#         86
+  C:0057H         LINE#         88
+  C:0058H         LINE#         89
+  C:005AH         LINE#         90
+  C:005CH         LINE#         91
+  C:005EH         LINE#         92
+  C:005FH         LINE#         95
+  C:0061H         LINE#         96
+  C:0063H         LINE#         97
+  C:0065H         LINE#         98
+  C:0066H         LINE#         102
+  C:0067H         LINE#         103
+  C:006AH         LINE#         105
+  C:006CH         LINE#         106
+  C:006EH         LINE#         108
+  C:0070H         LINE#         110
+  C:0071H         LINE#         111
+  C:0073H         LINE#         112
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/05/2014  10:26:44  PAGE 3
+
+
+  C:0075H         LINE#         113
+  C:0077H         LINE#         114
+  C:0078H         LINE#         117
+  C:007AH         LINE#         118
+  C:007CH         LINE#         119
+  C:007EH         LINE#         120
+  C:0080H         LINE#         124
+  C:0081H         LINE#         125
+  C:0083H         LINE#         126
+  C:0084H         LINE#         138
+  C:0085H         LINE#         139
+  C:0086H         LINE#         142
+  C:0088H         LINE#         145
   -------         ENDMOD        FINAL
 
-BL51 BANKED LINKER/LOCATER V6.22                                                      12/05/2014  09:31:02  PAGE 3
-
-
 ******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 007CH BYTE ( 6%) *
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0091H BYTE ( 7%) *
 ******************************************************************************
 
-Program Size: data=8.0 xdata=0 code=124
+Program Size: data=8.0 xdata=0 code=145
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
