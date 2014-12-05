@@ -136,7 +136,7 @@
         <Mm>
           <WinNumber>1</WinNumber>
           <SubType>0</SubType>
-          <ItemText>D:0X0040</ItemText>
+          <ItemText>D:0X0050</ItemText>
         </Mm>
       </MemoryWindow1>
       <Tracepoint>
@@ -165,7 +165,7 @@
         <aSer4>0</aSer4>
         <StkLoc>0</StkLoc>
         <TrcWin>0</TrcWin>
-        <newCpu>3</newCpu>
+        <newCpu>0</newCpu>
         <uProt>0</uProt>
       </DebugFlag>
       <LintExecutable></LintExecutable>

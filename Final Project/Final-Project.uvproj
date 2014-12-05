@@ -361,6 +361,13 @@
       <Groups>
         <Group>
           <GroupName>Source Group 1</GroupName>
+          <Files>
+            <File>
+              <FileName>final.a51</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\final.a51</FilePath>
+            </File>
+          </Files>
         </Group>
       </Groups>
     </Target>
