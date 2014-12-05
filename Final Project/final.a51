@@ -18,6 +18,7 @@ LOOP:
 		DJNZ R7,LOOP
 		;ACALL PACK
 		ACALL AVERAGE
+		ACALL LARGE
 		SJMP MAIN
 		
 PACK:		
@@ -45,11 +46,7 @@ AVERAGE:
 		
 REP:	
 		MOV B,@R0
-
-		ADD A,B
-
-		
-		
+		ADD A,B		
 
 		INC R0
 		DJNZ R3,REP
@@ -58,8 +55,31 @@ REP:
 		DIV AB
 		
 		
-		MOV A,48H
+		MOV 48H,A
 
 
 		RET
+		
+LARGE:		
+		MOV R0,#40H
+		MOV R2,#08H
+		MOV B,#00H
+		CLR A
+		
+		
+LOO:		
+		MOV A,@R0
+		CJNE A,B,NEXT
+NEXT:
+		JNC SKI
+		SJMP LAST
+SKI:	
+		MOV B,A
+LAST:
+		INC R0	
+		DJNZ R2,LOO
+		MOV A,B
+		MOV 49H,A
+		RET
+		
 		END
